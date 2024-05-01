@@ -1,0 +1,14 @@
+package javahong;
+
+public class HW7_Interface {
+
+	public HW7_Interface() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

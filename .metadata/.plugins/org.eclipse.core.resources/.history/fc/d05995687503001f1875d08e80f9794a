@@ -1,0 +1,42 @@
+package com.ruby.java.ch08.polymorphism;
+
+
+public class HRSTest2 {
+
+	public HRSTest2() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public static void calcTax() {
+	    	System.out.println("소득세를 계산합니다.");
+	}
+	  
+    public static void calcTax(Employee e) {
+    	if (e instanceof Salesman) {
+    		System.out.println("Salesman입니다.");
+    	}
+    	else if (e instanceof Manager){
+    		System.out.println("Manager입니다.");
+    	}
+    	else if (e instanceof Consultant){
+    		System.out.println("Consultant입니다.");
+    	}
+    	else System.out.println("Employee입니다.");
+    }
+  
+ 
+    
+    public static void main(String [] args) {
+    	Salesman s = new Salesman ();
+    	Consultant c = new Consultant();
+    	Manager m = new Manager();
+    	
+    	calcTax(s);
+    	calcTax(m);
+    	calcTax(c);
+    
+    	
+    }
+}
+

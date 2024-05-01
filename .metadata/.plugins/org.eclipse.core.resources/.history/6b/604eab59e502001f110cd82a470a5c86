@@ -1,0 +1,14 @@
+package ch07assign;
+
+public class ch07Hwtest {
+
+	public ch07Hwtest() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

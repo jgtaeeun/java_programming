@@ -1,0 +1,9 @@
+package javahong;
+
+public class MyLinkedList_Hw3 {
+
+	public MyLinkedList_Hw3() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

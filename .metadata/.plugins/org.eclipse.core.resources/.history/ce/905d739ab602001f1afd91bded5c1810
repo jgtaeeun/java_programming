@@ -1,0 +1,9 @@
+package javahong;
+
+public class Ch07_interface {
+
+	public Ch07_interface() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

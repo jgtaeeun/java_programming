@@ -1,0 +1,9 @@
+package quiz;
+
+public class PrimeNumber4 {
+
+	public PrimeNumber4() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

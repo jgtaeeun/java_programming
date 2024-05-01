@@ -1,0 +1,9 @@
+package edu;
+
+public class Test_array {
+
+	public Test_array() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,9 @@
+package com.ruby.java.ch06;
+
+public class ThisTest2 {
+
+	public ThisTest2() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

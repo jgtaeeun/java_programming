@@ -1,0 +1,9 @@
+package com.ruby.java.ch07.abstraction;
+
+public class CH07_AbstractClass {
+
+	public CH07_AbstractClass() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

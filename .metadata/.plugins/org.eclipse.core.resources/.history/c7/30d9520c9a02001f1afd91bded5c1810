@@ -1,0 +1,11 @@
+package javahong;
+
+public class Student extends Employee {
+	
+
+	public Student(){
+		
+		
+    }
+
+}

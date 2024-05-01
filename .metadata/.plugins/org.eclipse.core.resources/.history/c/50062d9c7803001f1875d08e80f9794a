@@ -1,0 +1,9 @@
+package com.ruby.java.ch08.innerclass;
+
+public class MyLinkeddList {
+
+	public MyLinkeddList() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

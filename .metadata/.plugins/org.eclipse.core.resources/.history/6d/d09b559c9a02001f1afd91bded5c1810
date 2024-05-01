@@ -1,0 +1,9 @@
+package com.ruby.java.ch07;
+
+public class HRSTest {
+
+	public HRSTest() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

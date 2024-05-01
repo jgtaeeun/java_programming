@@ -1,0 +1,9 @@
+package com.ruby.java.ch07;
+
+public class Emp {
+
+	public Emp() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

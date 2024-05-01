@@ -1,0 +1,13 @@
+package com.ruby.java.ch08;
+
+enum Mandarin{   
+	금귤, 한라봉, 레드향, 천혜향, 황금향;
+}
+
+public class EnumTest2 {
+
+	public EnumTest2() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,99 @@
+package com.ruby.java.ch08.polymorphism;
+
+abstract class Employee {       //추상클래스 
+	String name;
+	int salary;
+	
+	public abstract void calcSalary();
+	
+}
+
+class Salesman extends Employee{         //추상클래스 상속받은 자식 클래스
+	
+	
+	public void calcSalary() {
+		System.out.println("Salesman급여=기본금+판매수당");
+	}
+	
+}
+
+
+class Consultant extends Employee{
+	
+	
+	public void calcSalary() {
+		System.out.println("Consultant급여=기본금+컨설팅 특별 수당");
+	}
+	
+}
+
+
+class Manager extends Employee{
+	
+	
+	public void calcSalary() {
+		System.out.println("Manager급여=기본금+팀 성과 수당");
+	}
+	
+}
+class Director extends Manager{          //Manager을 상속받은 Director
+	
+}
+
+
+public class HRSTest {
+
+	public HRSTest() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public static void calcTax() {
+	    	System.out.println("소득세를 계산합니다.");
+	}
+	  
+    public static void calcTax(Employee e) {
+    	System.out.println("소득세를 계산합니다.");
+    }
+  
+//    public static void calcTax(Salesman a) {
+//    	System.out.println("소득세를 계산합니다.");
+//    }
+//    
+//    public static void calcTax(Consultant b) {
+//    	System.out.println("소득세를 계산합니다.");
+//    }
+//    
+//    public static void calcTax(Director c) {
+//    	System.out.println("소득세를 계산합니다.");
+//    }
+//    
+    
+    
+    public static void main(String [] args) {
+    	Salesman s = new Salesman ();
+    	Consultant c = new Consultant();
+    	Director d = new Director();
+    	Salesman s2 = s;
+    	
+    	calcTax();
+//    	calcTax(s);                 //HRSTest 클래스의 메서드
+//    	calcTax(c);
+//    	calcTax(d);
+    	 
+    	
+    	System.out.println(s.toString());             //Salesman,Consultant, Director클래스 메서드에 toString()이 없다. 상위클래스 object가 가지고 있는 toString()적용된다.
+    	System.out.println(c.toString());
+    	System.out.println(d.toString());
+    	System.out.println(s2.toString());
+    	
+    	if(s.equals(c)) {                                   //equals() 또한 object클래스의 메서드이다.
+    		System.out.println("동일한 객체 입니다.");
+    	}else {
+    		System.out.println("서로 다른 객체 입니다.");
+    	}
+    	
+    	
+    }
+}
+

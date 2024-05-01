@@ -1,0 +1,9 @@
+package com.ruby.java.ch06;
+
+public class Member_1 {
+
+	public Member_1() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

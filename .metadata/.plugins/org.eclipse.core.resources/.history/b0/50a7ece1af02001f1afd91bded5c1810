@@ -1,0 +1,15 @@
+package com.ruby.java.ch07.abstraction;
+
+public class MessengerTest {
+
+	public MessengerTest() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+       IPhoneMessenger iphone = new  IPhoneMessenger();
+       iphone.getMessage();
+	}
+
+}

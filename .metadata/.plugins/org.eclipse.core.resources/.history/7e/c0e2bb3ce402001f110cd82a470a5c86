@@ -1,0 +1,5 @@
+package ch07assign;
+
+public interface Shape1 {
+
+}
