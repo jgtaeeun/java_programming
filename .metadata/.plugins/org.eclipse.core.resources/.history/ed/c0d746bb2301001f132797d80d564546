@@ -1,9 +1,0 @@
-package quiz;
-
-public class PrimeNumber2 {
-
-	public PrimeNumber2() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

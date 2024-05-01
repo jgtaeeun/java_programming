@@ -1,0 +1,9 @@
+package com.ruby.java.ch10;
+
+public class Test05 {
+
+	public Test05() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

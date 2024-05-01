@@ -1,9 +1,0 @@
-package quiz;
-
-public class MatrixCalc {
-
-	public MatrixCalc() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
