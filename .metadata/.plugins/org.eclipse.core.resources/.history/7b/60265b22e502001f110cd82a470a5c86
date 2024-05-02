@@ -1,9 +1,0 @@
-package ch07assign;
-
-public class Square1 {
-
-	public Square1() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

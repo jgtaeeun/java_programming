@@ -33,15 +33,16 @@ public class PrimeNumber1 {
 ////		return flag;
 ////	}
 //	
-	public boolean isPrime1(int a) {
+	public static boolean isPrime1(int a) {
 		boolean flag=true;
 		
 		
 		
         int result=0;
         if (a==2) {}
+        else if (a==1) flag=false;
         else {
-		for(int i =a-1 ; i>=start_num2;) {
+		for(int i =a-1 ; i>=2;) {
 			 result= a%i;
 			 
 			 if (result!=0) {

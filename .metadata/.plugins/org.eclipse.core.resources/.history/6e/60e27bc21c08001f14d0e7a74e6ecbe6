@@ -1,0 +1,16 @@
+package com.ruby.java.ch11;
+
+public class Test01 {
+
+	public Test01() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+                 int arr[]= new int[3];
+                 arr[3] = 30;
+                 System.out.println("OK");
+	}
+
+}

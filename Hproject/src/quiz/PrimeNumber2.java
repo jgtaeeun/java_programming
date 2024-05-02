@@ -28,8 +28,14 @@ public class PrimeNumber2 {
     	  
     	  
     	  for (int i = s ; i<= e ; i++) {
-    		  int div = i/2;
+    		  
     		 
+    	    	//  if(PrimeNumber1.isPrime1(i)==true) {
+    	    	//	  System.out.print(i+ " "); 
+    	    	//	  count+=1;
+    	    	//  }
+    		  int div = i/2;
+     		 
     		  if (i==1) {}
     		  else if((i==2)||(i==3)) {
     			  System.out.println(i+ " ");
@@ -51,15 +57,12 @@ public class PrimeNumber2 {
     		      
     		      
     		  }
+    		 
     		    	  
     	  }
-    		    
-    		    
-    	
     	  
-    	
-    	
     	  System.out.println(s + " ~ "+ e + " 중에서 소수에 해당하는 숫자 개수 :" + count);
+    	  
     	
     	  System.out.println("Done!");
         }

@@ -1,9 +1,0 @@
-package com.ruby.java.ch07.abstraction;
-
-public class GalaxyMessenger {
-
-	public GalaxyMessenger() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
