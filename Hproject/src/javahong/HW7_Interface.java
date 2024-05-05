@@ -66,7 +66,7 @@ class Rectangle1 implements Shape1 {
 		double result1=0; //선분의 길이
 		
 		calc();
-		result1 = (double) 2 *width * height;
+		result1 = (double) 2 *(width + height);
 		return result1;
 	}
 	public float area() {
