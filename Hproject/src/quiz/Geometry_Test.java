@@ -71,7 +71,7 @@ class Polyline extends Geometry{
 	}
 	double getLength() {
 		double sum=0;
-		for(int k=0 ; k<=xlist.size()/2;k++) {
+		for(int k=0 ; k<xlist.size()-1;k++) {
 			sum= Line.getLengthcalc(xlist.get(k), xlist.get(k+1), ylist.get(k), ylist.get(k+1))+sum;
 		}
 	    return sum;	
@@ -135,19 +135,23 @@ class Rectagle extends Geometry{
 	double getArea() {
 		double sum1 = 0;
 
-		sum1 = AbsLength(xArr[0],xArr[1], xArr[2],xArr[3],yArr[0],yArr[1], yArr[2],yArr[3])  *AbsLength(xArr[0],xArr[1], xArr[2],xArr[3],yArr[0],yArr[1], yArr[2],yArr[3]);
+		sum1 = AbsLength(xArr[0],xArr[1], xArr[2],xArr[3],yArr[0],yArr[1], yArr[2],yArr[3])  *AbsLength(yArr[0],yArr[1], yArr[2],yArr[3],xArr[0],xArr[1], xArr[2],xArr[3]);
 		return sum1;
 	}
 	double getLength() {
 		double sum1 = 0;
 		
-		sum1 =2 * AbsLength(xArr[0],xArr[1], xArr[2],xArr[3],yArr[0],yArr[1], yArr[2],yArr[3]) ;
+		sum1 =2 *(AbsLength(xArr[0],xArr[1], xArr[2],xArr[3],yArr[0],yArr[1], yArr[2],yArr[3])  +AbsLength(yArr[0],yArr[1], yArr[2],yArr[3],xArr[0],xArr[1], xArr[2],xArr[3])) ;
 		return sum1;
 	}
 	
 	static double AbsLength(int x1, int x2, int x3, int x4, int y1, int y2, int y3, int y4) {
 		double sum=0;
-		if ((x1!=x2)&& (y1==y2) )sum =(double)Math.abs(x1-x2);
+		if ((x1!=x2)&& (y1!=y2) ) {
+			if((x1!=x3)&& (y1==y3) ) {sum =(double)Math.abs(x3-x1);}
+			else sum =(double)Math.abs(x4-x1);
+		}
+		else if ((x1!=x2)&& (y1==y2) )sum =(double)Math.abs(x2-x1);
 		else if ((x1!=x3)&& (y1==y3) )sum =(double)Math.abs(x3-x1);
 		else sum =(double)Math.abs(x4-x1);
 		return sum;
@@ -182,7 +186,7 @@ public class Geometry_Test {
 		
 	
 		Polyline polyline2 = new Polyline(x_tri, y_tri);   //점 3개=>선2개
-		Polyline polyline1 = new Polyline(x_rec, x_rec);  //점 4개=>선3개
+		Polyline polyline1 = new Polyline(x_rec, y_rec);  //점 4개=>선3개
 		
 		System.out.println("line의 length: " + line.getLength());
 		System.out.println("polyline(점3개)의 length: " + polyline2.getLength());
