@@ -35,7 +35,6 @@ class ListComparator implements Comparator<List<Integer>>{
 	}
 }
 public class Test_ch10_lotto {
-
 	public Test_ch10_lotto() {
 		// TODO Auto-generated constructor stub
 	}
@@ -65,26 +64,39 @@ public class Test_ch10_lotto {
 			for (int j = 0; lotto.size() <= 6; j++) {
 				lotto.add(number.nextInt(46));
 			}
-			lot.add();
+			lot.add(lotto);
 			//구현할 부분
-	
+	      
 		}
+		//System.out.println(lot );
 		System.out.println("\nlot hashset을 출력\n" );
 		
 		for (HashSet<Integer> eachLotto : lot) {            
+			List<Integer>list = new ArrayList<>();
+			
 			/*
 			 * 33  1 17 22  6  8  + 보너스번호: 12
 			 *  0  1 18 38  6 24  + 보너스번호: 29
 			 */
 			//구현할 부분:보너스번호는 arraylist에 넣는다.
+			//System.out.println(eachLotto);
+			Object ob[]= eachLotto.toArray();
+			for(int k=0 ; k<ob.length-1; k++) {
+				//System.out.print(ob[k]+ " "); 
+				list.add((Integer)ob[k]);
+			}
+			//System.out.print("+");
+			//System.out.print( " 보너스번호: "+ ob[ob.length-1]);
+			list.add((Integer)ob[ob.length-1]);
+			al.add(list); 
+			//System.out.println();
 		}
 		System.out.println("복권 정렬전::lot = " + al);//al:보너스번호+복권번호는 list에 넣는다.
-		
+			
 		al.sort(new ListComparator());
 		System.out.println("복권 정렬후::lot = " + al);
-		//hashset의 리스트를 정렬하는 알고리즘 개발
-		//hashset를 arrayList로 변환
-		//당첨번호 추첨
+
+		
 		HashSet<Integer> win = new HashSet<>();
 		for (int j = 0; win.size() < 7; j++) {//6개 번호와 보너스 번호
 			win.add(number.nextInt(46));
@@ -93,12 +105,13 @@ public class Test_ch10_lotto {
 		// 6개를 맞힌 복권을 찾는다 
 		System.out.println();
 		winnerLotto(win, al);//1등을 찾는다
-		
 	}
 	static void winnerLotto(HashSet<Integer> w,List<List<Integer>> al ) {
 		// 당첨번호 w에 대하여 발행된 복권 리스트 al의 모든 원소 elem에 대하여 조사한다
 		for (int i = 0; i < al.size(); i++) {
 		//구현할 부분
+			
+			checkWinner(w,al.get(i)) ;
 		}
 	}
 	static void checkWinner(HashSet<Integer> w,List<Integer> elem) {
@@ -108,9 +121,12 @@ public class Test_ch10_lotto {
 		for (int i = 0; i < L.size()-1; i++)
 		{
 			/*
-			 * 당첨번호 각 번호를 몇개 포함하는지를 elem에 대하여 조사
+			 * 당첨번호 각 번호를 몇개 포함하는지를 elem에 대하여 조사(보너스 번호 빼고 조사)
 			 */
 			//구현할 부분
+			if (L.contains(elem.get(i))&&(L.indexOf(elem.get(i))<L.size()-1)) count+=1;
+			
+			
 		}
 		switch (count) {
 		case 0:
@@ -141,4 +157,5 @@ public class Test_ch10_lotto {
 
 
 	}
+
 }
