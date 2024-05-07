@@ -44,7 +44,10 @@ class Triangle implements Shape {
 		sum2 = (float) ( Math.sqrt(  sub * Math.abs(sub-sum1_1) *Math.abs(sub-sum1_2) * Math.abs(sub-sum1_3)   ) );
 		return sum2;
 	}
-	
+	@Override
+	public String toString() {
+		return "("+x1+", "+y1+", "+x2+", "+y2+", "+x3+", "+y3+")";
+	}
 	
 }
 class Rectangle implements Shape {
@@ -76,7 +79,10 @@ class Rectangle implements Shape {
 		return result2;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "("+x1+", "+y1+", "+x2+", "+y2+", "+x3+", "+y3+", "+x4+", "+y4+")";
+	}
 }
 
 
@@ -154,7 +160,10 @@ class Pentagon implements Shape {
 	   return sum2;
 	   
    }
-
+	@Override
+	public String toString() {
+		return "("+x1+", "+y1+", "+x2+", "+y2+", "+x3+", "+y3+", "+x4+", "+y4+", " +x5+", "+y5+")";
+	}
 }
 
 
@@ -163,7 +172,7 @@ public class Shape_Interface {
 	public Shape_Interface() {
 		// TODO Auto-generated constructor stub
 	}
-	
+	public static void main(String arg[]) {
 	
 	Shape[]arr = new Shape[4];
 	arr[0] = new Triangle(1,2,3,4,5,6);
@@ -175,8 +184,9 @@ public class Shape_Interface {
 		System.out.println(p.toString());
 	}
 	
-	System.out.println("삼각형 둘레 길이 = " + t.perimeter());
-	System.out.println("삼각형 면적 = " + t.area());
-	System.out.println("사각형 둘레 길이 = " + r.perimeter());
-	System.out.println("사각형 면적 = " + r.area());
+	System.out.println("삼각형 둘레 길이 = " + arr[0].perimeter());
+	System.out.println("삼각형 면적 = " + arr[0].area());
+	System.out.println("사각형 둘레 길이 = " + arr[1].perimeter());
+	System.out.println("사각형 면적 = " + arr[1].area());
+	}
 }
