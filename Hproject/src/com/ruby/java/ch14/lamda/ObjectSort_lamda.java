@@ -20,9 +20,6 @@ import java.util.Random;
  *   public int compareTo(T o);
  *   }   
  */
-interface Comparable<T> {
-	   public int compareTo(T o);
-}   
 
 
 class Student {
@@ -56,11 +53,11 @@ public class ObjectSort_lamda {
 
 	}
 	
-	static void showStudents(String msg, ArrayList<Student> list) {
+	static void showStudents(String msg, List<Student> list) {
 		System.out.print(msg + ": ");
-		for(int i=0 ; i<list.size() ; i++) {
-			System.out.print(list.get(i)+" ");
-		}
+		
+		System.out.print(list);
+		
 		System.out.println();
 
 	}
@@ -85,6 +82,9 @@ public class ObjectSort_lamda {
 				return Integer.parseInt(s1.sno)-Integer.parseInt(s2.sno);
 			}
 		};
+		
+		Comparator<Student> compSno2 = (s1,  s2) ->Integer.parseInt(s1.sno)-Integer.parseInt(s2.sno);
+		
 		
 		
 		
@@ -118,16 +118,15 @@ public class ObjectSort_lamda {
         
         showStudents("sno 정렬전", sList);
         //문제3: Collections.sort()를 사용한 sList 정렬 - sno 사용, 람다식 사용
-       // Comparable<Student> studentclass = (sno) -> for(int i = 0 ; i < sList.size() ;i++) 
-       // Collections.sort(sList,studentclass);
-       // showStudents("sno 정렬후", sList);
+        Collections.sort(sList,compSno2);
+        showStudents("sno 정렬후", sList);
        
         
         
-       // showStudents("sname 정렬전", sList);
+        showStudents("sname 정렬전", sList);
         //문제4: Collections.sort()를 사용한 sList 정렬 - sname 사용
-        //Collections.sort(sList);
-      // showStudents("sname 정렬후", sList);
+        Collections.sort(sList,sname());
+        showStudents("sname 정렬후", sList);
         
         
         
