@@ -14,7 +14,7 @@ class Student{
 		this.sname=sname;
 	}
 	public String toString() {
-		return sno  + ", "+sname ;
+		return"(" +sno  + ", "+sname +")";
 		
 	}
 	
@@ -25,7 +25,7 @@ class SnoComparator implements Comparator<Student> {    //Comparator<T>
    public int compare(Student s1, Student s2) {           // public int compare(Student s1, Student s2);추상메소드 구현
        // 학번을 기준으로 비교
 	   
-       return s1.sno.compareTo(s2.sno);
+       return Integer.parseInt(s1.sno)-Integer.parseInt(s2.sno);
    }
 }
 public class Test_ObjectArraySort {
@@ -53,8 +53,6 @@ public class Test_ObjectArraySort {
 		System.out.println();
 		
 		showData("정렬전", data);
-		
-		
 		Arrays.sort(data, new SnoComparator());
 		showData("정렬후", data);
 	}
