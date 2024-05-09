@@ -16,13 +16,19 @@ import java.util.Random;
  *    int compare(T 01, T 02);
  *    }
  *    
+ *       
+ *       
+ *       
+ *    
  * public interface Comparable<T> {
  *   public int compareTo(T o);
  *   }   
  */
+  //interface Comparator, interface Comparable은 자바에 내장되어있으므로 따로 선언할 필요없다. import하면 된다.
+//interface Comparator =>compare(T 01, T 02)
+// interface Comparable=>compareTo(T o)
 
-
-class Student {
+class Student  {
 	String sno;
 	String sname;
 	
@@ -35,15 +41,18 @@ class Student {
 		return"(" +sno  + ", "+sname +")";
 		
 	}
+	 
 }
 
 
 public class ObjectSort_lamda {
 	
 	
-	static void sortStudents() {
+	static void sortStudents(Student[] Array) {
+				
+		}
 
-	}
+	
 	static void showStudents(String msg, Object[] data) {
 		System.out.print(msg + ": ");
 		for(int i=0 ; i<data.length ; i++) {
@@ -62,19 +71,18 @@ public class ObjectSort_lamda {
 
 	}
 	
-	public static Comparator<Student> sname() {
-		return new Comparator<Student>() {
-			@Override
-			public int compare(Student s1, Student s2) {
-				return s1.sname.charAt(0)-s2.sname.charAt(0);
-			}
-		};
-	}
+	
 	
 	public static void main(String[] args) {
 		
 		
-		
+		Comparator<Student> snameComp = new Comparator<Student>() {
+				@Override
+				public int compare(Student s1, Student s2) {
+					return s1.sname.compareTo(s2.sname);    //문자열은 .compareTo() 메서드 쓴다.
+				}
+			
+		};
 		
 		//문제1: Arrays.sort()를 사용한 sArray 정렬 - sno 사용, 익명클래스 사용
 		Comparator<Student> compSno = new Comparator<Student>() {
@@ -84,9 +92,6 @@ public class ObjectSort_lamda {
 		};
 		
 		Comparator<Student> compSno2 = (s1,  s2) ->Integer.parseInt(s1.sno)-Integer.parseInt(s2.sno);
-		
-		
-		
 		
         Student[] sArray = new Student[5];
         
@@ -110,8 +115,8 @@ public class ObjectSort_lamda {
         
         showStudents("sname 정렬전", sArray);
         //문제2: Arrays.sort()를 사용한 sArray 정렬 - sname 사용, 익명 객체 사용
-        Comparator<Student> sname=sname();
-        Arrays.sort (sArray,sname);
+     
+        Arrays.sort (sArray,snameComp);
         showStudents("sname 정렬후", sArray);
        
         
@@ -125,14 +130,15 @@ public class ObjectSort_lamda {
         
         showStudents("sname 정렬전", sList);
         //문제4: Collections.sort()를 사용한 sList 정렬 - sname 사용
-        Collections.sort(sList,sname());
+        Collections.sort(sList,snameComp);
         showStudents("sname 정렬후", sList);
         
+       
         
-        
-       // showStudents("sno 정렬전", sArray);
+        showStudents("sno 정렬전", sArray);
         //문제5: sortStudents()를 사용한 sArray 정렬 - sno 사용
-      //  showStudents("sname 정렬후", sArray);
+       // sortStudents(sArray);
+        //showStudents("sno 정렬후", sArray);
 	}
 
 }
