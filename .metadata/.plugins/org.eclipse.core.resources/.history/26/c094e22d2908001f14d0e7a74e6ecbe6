@@ -1,9 +1,0 @@
-package quiz;
-
-public class Geometry {
-
-	public Geometry() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

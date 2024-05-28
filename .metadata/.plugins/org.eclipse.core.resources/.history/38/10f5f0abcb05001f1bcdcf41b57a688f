@@ -1,9 +1,0 @@
-package javahong;
-
-public class Hw08_Polymorphism {
-
-	public Hw08_Polymorphism() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

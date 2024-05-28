@@ -1,0 +1,14 @@
+package Chap2_기본자료구조;
+
+public class train_ch2_14 {
+
+	public train_ch2_14() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,9 +1,0 @@
-package com.ruby.java.ch08.enumclass;
-
-public class Status {
-
-	public Status() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

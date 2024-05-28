@@ -1,0 +1,19 @@
+package Chap2_기본자료구조;
+
+import java.util.Arrays;
+//교재 67 - 실습 2-5
+//2번 실습
+import java.util.Random;
+
+public class train_ch2_5 {
+
+	public train_ch2_5() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

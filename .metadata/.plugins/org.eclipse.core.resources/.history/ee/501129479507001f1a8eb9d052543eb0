@@ -1,9 +1,0 @@
-package javahong;
-
-public class Test_ch10_lotto {
-
-	public Test_ch10_lotto() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

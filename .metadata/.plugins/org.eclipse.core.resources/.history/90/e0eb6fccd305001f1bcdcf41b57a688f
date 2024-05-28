@@ -1,9 +1,0 @@
-package edu;
-
-public class Shape_Interface {
-
-	public Shape_Interface() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

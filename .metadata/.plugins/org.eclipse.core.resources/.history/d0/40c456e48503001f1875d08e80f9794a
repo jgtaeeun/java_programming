@@ -1,9 +1,0 @@
-package com.ruby.java.ch08;
-
-public class EnumTest01 {
-
-	public EnumTest01() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

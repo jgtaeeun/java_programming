@@ -1,9 +1,0 @@
-package com.ruby.java.ch10.collection;
-
-public class Test02_iterator {
-
-	public Test02_iterator() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

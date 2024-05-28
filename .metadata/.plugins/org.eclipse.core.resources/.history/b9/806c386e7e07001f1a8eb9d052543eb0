@@ -1,9 +1,0 @@
-package com.ruby.java.ch10.collection;
-
-public class Test01_arraylist {
-
-	public Test01_arraylist() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

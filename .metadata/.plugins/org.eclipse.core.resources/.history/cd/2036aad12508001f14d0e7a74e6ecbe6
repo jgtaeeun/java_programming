@@ -1,9 +1,0 @@
-package com.ruby.java.ch11;
-
-public class NegativeNumberException {
-
-	public NegativeNumberException() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

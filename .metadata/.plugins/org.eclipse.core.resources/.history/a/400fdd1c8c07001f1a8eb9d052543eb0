@@ -1,9 +1,0 @@
-package javahong;
-
-public class MyLinkedList {
-
-	public MyLinkedList() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
