@@ -1,0 +1,43 @@
+package Chap2_기본자료구조;
+
+import java.util.Arrays;
+
+public class train_실습3_6_0스트링배열정렬이진탐색 {
+
+	public train_실습3_6_0스트링배열정렬이진탐색() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	static void showData(String txt, String [] data) {
+		System.out.println(Arrays.toString(data));
+	}
+	
+	
+	static void sortData(String [] data) {
+		//올림차순으로 정렬 교재211-212 단순 선택 정렬 알고리즘으로 구현
+		for (int i=0 ;  i<data.length ; i++) {
+			String min=data[i];
+			for (int j=i+1 ; j<data.length ; j++) {
+				if(data[j].compareTo(min)<0) {
+					min=data[j];
+				}
+		//	swap(data[i], min);	
+			String tmp = data[i];
+			data[i]=min;
+			min = tmp;
+			}
+		}
+		
+	}	
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String []data = {"사과","포도","복숭아", "감", "산딸기", "블루베리", "대추", "수박", "참외"};
+		showData("정렬전", data);
+		sortData(data);//올림차순으로 정렬 교재211-212 단순 선택 정렬 알고리즘으로 구현
+		showData("정렬후", data);
+	}
+
+}
