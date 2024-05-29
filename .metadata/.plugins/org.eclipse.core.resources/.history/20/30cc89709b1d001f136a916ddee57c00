@@ -33,8 +33,8 @@ public class train_실습3_6_1객체배열이진탐색 {
 	}
 	static void showData(String txt,PhyscData2[] data ) {
 		for(PhyscData2 d : data) {
-			System.out.println( d.toString());
-			//System.out.println( "[" +d.name + " ," +  d.height + " ,"+ d.vision +"]");
+			// d.toString();
+			System.out.println( "[" +d.name + " ," +  d.height + " ,"+ d.vision +"]");
 		}
 	}
 	
@@ -127,31 +127,31 @@ public class train_실습3_6_1객체배열이진탐색 {
 				new PhyscData2("길동", 167, 0.5),
 		};
 		
-		showData("정렬전", data);
+	//	showData("정렬전", data);
 		sortData(data);//6장 실습 06-4 단순 선택 정렬 
-		System.out.println();
-		showData("정렬후", data);
-		System.out.println();
+	//	System.out.println();
+	//	showData("정렬후", data);
+	//	System.out.println();
 		
 		reverse(data);
 		showData("역순 재배치후", data);
 		
 		System.out.println();
-	//	Arrays.sort(data);//사용된다 그 이유는? 이해가 되어야 한다 
-	//	showData("Arrays.sort() 정렬후", data);
+		Arrays.sort(data);//사용된다 그 이유는? 이해가 되어야 한다 
+		showData("Arrays.sort() 정렬후", data);
 		
-	//	PhyscData2 key = new PhyscData2("길동", 167, 0.5);   //객체 그 자체가 찾고자 하는 키이다.
-	//	int resultIndex = linearSearch(data, key);
-	//	System.out.println("\nlinearSearch(<길동,167,0.5>): result index = " + resultIndex);
+		PhyscData2 key = new PhyscData2("길동", 167, 0.5);   //객체 그 자체가 찾고자 하는 키이다.
+		int resultIndex = linearSearch(data, key);
+		System.out.println("\nlinearSearch(<길동,167,0.5>): result index = " + resultIndex);
 		
-	//	key = new PhyscData2("박동", 167, 0.6);
-	//	resultIndex = binarySearch(data, key);//comparable를 사용
-	//	System.out.println("\nbinarySearch(<박동,167,0.6>): result index = " + resultIndex);
+		key = new PhyscData2("박동", 167, 0.6);
+		resultIndex = binarySearch(data, key);//comparable를 사용
+		System.out.println("\nbinarySearch(<박동,167,0.6>): result index = " + resultIndex);
 		
 		//교재 115 Arrays.binarySearch에 의한 검색
-	//	key = new PhyscData2("나동", 164, 0.6);
-	//	resultIndex = Arrays.binarySearch(data, key);//comparable를 사용
-	//	System.out.println("\nArrays.binarySearch(<나동,164,0.6>): result index = " + resultIndex);
+		key = new PhyscData2("나동", 164, 0.6);
+		resultIndex = Arrays.binarySearch(data, key);//comparable를 사용
+		System.out.println("\nArrays.binarySearch(<나동,164,0.6>): result index = " + resultIndex);
 	}
 
 }

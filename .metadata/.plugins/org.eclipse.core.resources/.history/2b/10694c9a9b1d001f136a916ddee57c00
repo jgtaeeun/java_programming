@@ -136,7 +136,7 @@ public class train_실습3_6_1객체배열이진탐색 {
 		reverse(data);
 		showData("역순 재배치후", data);
 		
-		System.out.println();
+	//	System.out.println();
 	//	Arrays.sort(data);//사용된다 그 이유는? 이해가 되어야 한다 
 	//	showData("Arrays.sort() 정렬후", data);
 		

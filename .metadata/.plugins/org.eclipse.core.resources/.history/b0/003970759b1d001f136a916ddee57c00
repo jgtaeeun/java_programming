@@ -129,14 +129,14 @@ public class train_실습3_6_1객체배열이진탐색 {
 		
 		showData("정렬전", data);
 		sortData(data);//6장 실습 06-4 단순 선택 정렬 
-		System.out.println();
+	//	System.out.println();
 		showData("정렬후", data);
-		System.out.println();
+	//	System.out.println();
 		
 		reverse(data);
 		showData("역순 재배치후", data);
 		
-		System.out.println();
+	//	System.out.println();
 	//	Arrays.sort(data);//사용된다 그 이유는? 이해가 되어야 한다 
 	//	showData("Arrays.sort() 정렬후", data);
 		

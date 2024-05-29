@@ -46,7 +46,7 @@ public class Test_2_14 {
 	static void showData(String txt,PhyscData[] data) {
 			for (int i=0 ; i<data.length ; i++) {
 				//System.out.println( data[i].name + " " + data[i].height + " "+ data[i].vision);
-				System.out.println(data[i].toString()); // 
+				System.out.println(data[i].toString()); // toString()으로 실행이 안되는 이유???
 			}
 			System.out.println();
 	}
