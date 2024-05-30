@@ -1,6 +1,8 @@
 package Chap3_검색알고리즘;
 import java.util.Arrays;
 
+
+
 class PhyscData2 implements Comparable<PhyscData2>{
 	String name;
 	int height;
@@ -13,16 +15,23 @@ class PhyscData2 implements Comparable<PhyscData2>{
 			this.vision=vision;
     }
 	
-	@Override
+	@Override 
+	//Object메서드 상속
 	public String toString() {//[홍길동,162,0.3] 형태로 리턴한다 
 		return "[" +name + "," + height + "," + vision +"]" ;
 	}
 	
 	@Override
 	public int compareTo(PhyscData2 p) {
-		return this.name.compareTo(p.name);
+		int result= this.name.compareTo(p.name);
+		if (result==0) {
+			return this.height-p.height;
+			}
+		else return result;
 	}
-
+	public boolean equals(Object obj) {
+		return this.equals(obj);
+	}
 }
 
 
@@ -137,21 +146,21 @@ public class train_실습3_6_1객체배열이진탐색 {
 		showData("역순 재배치후", data);
 		
 		System.out.println();
-	//	Arrays.sort(data);//사용된다 그 이유는? 이해가 되어야 한다 
-	//	showData("Arrays.sort() 정렬후", data);
+		Arrays.sort(data);//사용된다 그 이유는? 이해가 되어야 한다 
+		showData("Arrays.sort() 정렬후", data);
 		
-	//	PhyscData2 key = new PhyscData2("길동", 167, 0.5);   //객체 그 자체가 찾고자 하는 키이다.
-	//	int resultIndex = linearSearch(data, key);
-	//	System.out.println("\nlinearSearch(<길동,167,0.5>): result index = " + resultIndex);
+		PhyscData2 key = new PhyscData2("길동", 167, 0.5);   //객체 그 자체가 찾고자 하는 키이다.
+		int resultIndex = linearSearch(data, key);
+		System.out.println("\nlinearSearch(<길동,167,0.5>): result index = " + resultIndex);
 		
-	//	key = new PhyscData2("박동", 167, 0.6);
-	//	resultIndex = binarySearch(data, key);//comparable를 사용
-	//	System.out.println("\nbinarySearch(<박동,167,0.6>): result index = " + resultIndex);
+		key = new PhyscData2("박동", 167, 0.6);
+		resultIndex = binarySearch(data, key);//comparable를 사용
+		System.out.println("\nbinarySearch(<박동,167,0.6>): result index = " + resultIndex);
 		
 		//교재 115 Arrays.binarySearch에 의한 검색
-	//	key = new PhyscData2("나동", 164, 0.6);
-	//	resultIndex = Arrays.binarySearch(data, key);//comparable를 사용
-	//	System.out.println("\nArrays.binarySearch(<나동,164,0.6>): result index = " + resultIndex);
+		key = new PhyscData2("나동", 164, 0.6);
+		resultIndex = Arrays.binarySearch(data, key);//comparable를 사용 =>compareTo에서 name, height까지만 비교하기에 vision을 무시하였기에 인덱스 1이 출력된다.
+		System.out.println("\nArrays.binarySearch(<나동,164,0.6>): result index = " + resultIndex);
 	}
 
 }
