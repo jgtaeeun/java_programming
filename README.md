@@ -126,3 +126,5 @@ static 메서드;          #인스턴스 객체 없이 사용가능한 메서드
 Arrays.sort  Collections.sort
 
 리스트 출력 :::for-each로 출력
+
+25)*try-catch-resources 
