@@ -121,3 +121,8 @@ static 메서드;          #인스턴스 객체 없이 사용가능한 메서드
 23)변수명 :소문자
     클래스명 : 대문자
 
+
+24)배열 ,      리스트 
+Arrays.sort  Collections.sort
+
+리스트 출력 :::for-each로 출력
