@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -78,6 +79,11 @@ public class Test_중복없는리스트합병 {
 		for( int i = 0 ; i< list2.size() ; i++) {
 			list3.add(list2.get(i));
 		}
+		
+		Collections.sort(list3);
+		list3=removeDuplicate(list3);
+		
+		
 		return list3;			
 	}
 	static int binSearch(String[] s, int n, String key) {
@@ -179,7 +185,8 @@ public class Test_중복없는리스트합병 {
 			FileOutputStream file = new FileOutputStream("c.txt");
 			FileChannel channel = file.getChannel();
 			channel.write(buffer);
-		//	file.close();
+		
+			file.close();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
