@@ -24,17 +24,20 @@ public class insertSQL {
 		
 	}
 	
-	static void updateUser(PreparedStatement pt , int id, String pass, String name) throws SQLException {
+	static void updateUser(Connection con, int id, String pass, String name) throws SQLException {
+		PreparedStatement pt = con.prepareStatement("update member set pass=? ,name=? where id=?");
 		pt.setInt(3, id);
 		pt.setString(1 ,pass);
 		pt.setString(2,name);
 		pt.executeUpdate();
 		
+		pt.close();
+		
 	}
 	
 	static void selectUser(Connection con) throws SQLException {
 		Statement st= con.createStatement();
-		ResultSet rs = st.executeQuery("select id, pass, name from member ");
+		ResultSet rs = st.executeQuery("select id, pass, name from member" );
 		ResultSetMetaData meta = rs.getMetaData();
 		
 		int count = meta.getColumnCount();
@@ -50,53 +53,66 @@ public class insertSQL {
 		rs.close();
 	}
 	
+	static void query1(Connection con, int id, String pass, String name) throws SQLException {
+//		
+//		PreparedStatement pt = con.prepareStatement("insert into member(id, pass, name) values (?, ?, ?)");
+//		pt.setInt(1,id);
+//		pt.setString(2, pass);
+//		pt.setString(3,name);
+//		pt.executeUpdate();
+//		pt.close();
+		
+		// try -catch -resources 문
+		try (PreparedStatement pt = con.prepareStatement("insert into member(id, pass, name) values (?, ?, ?)")) {
+			pt.setInt(1,id);
+			pt.setString(2, pass);
+			pt.setString(3,name);
+			pt.executeUpdate();
+			pt.close();
+		}
+		catch (Exception e){
+			System.out.println("연결실패"+e.getMessage());
+		}
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		int count=0;
+		while(count<10) {
 		try {
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/musthave", "scott", "tiger");
 			
 			System.out.println("연결 성공");
-			
-			//업로드
-//			PreparedStatement pt = con.prepareStatement("insert into member(id, pass, name) values (?, ?, ?)");
-//			pt.setInt(1, 1);
-//			pt.setString(2, "pass1");
-//			pt.setString(3,"name1");
-//			pt.executeUpdate();
-//			
-//			
-//			for (int i=2 ; i<=10 ; i++) {
-//				
-//				pt.setInt(1, i);
-//				pt.setString(2, "pass"+i);
-//				pt.setString(3,"name"+i);
-//				pt.executeUpdate();
-//			}
-//			//삭제
-			//deleteUser(con);
-			
-			//데이터 수정 (업로드)
-			PreparedStatement pt = con.prepareStatement("update member set pass=? ,name=? where id=?");
 			Scanner sc = new Scanner(System.in);
-			System.out.print("변경하고자 하는 id: "); int id = sc.nextInt();
-			System.out.print("pass 변경사항: "); String pass = sc.next();
-			System.out.print("name 변경사항: "); String name = sc.next();
-			updateUser(pt, id, pass, name);
 			
-			//변경이후 데이터 출력
-			selectUser(con);
+			System.out.println("[I]nput , [D]elete, [U]pdate, [S]how");
+			System.out.print("원하는 항목 선택 :");
+			char want=sc.next().charAt(0);
 			
-			pt.close();
-			con.close();
-			
+			switch(want) {
+			case 'I':  {System.out.print("입력 id: "); int id = sc.nextInt();
+					   System.out.print("pass 입력사항: "); String pass = sc.next();
+					   System.out.print("name 입력사항: "); String name = sc.next();
+					   query1(con, id, pass, name);  break;}
+			case 'D':  {deleteUser(con); break;}
+			case 'U':  { System.out.print("변경하고자 하는 id: "); int id = sc.nextInt();
+						System.out.print("pass 변경사항: "); String pass = sc.next();
+						System.out.print("name 변경사항: "); String name = sc.next();
+						updateUser(con, id, pass, name); break;}
+			case 'S':  {selectUser(con); break;}
+			default : System.out.println("범위 내 항목 선택하세요"); break;
+			}
+
+
 			
 		}
 		catch (Exception e) {
 			System.out.println("연결실패"+e.getMessage());
 			e.printStackTrace();
 		}
+		count+=1;
 	}
+}
 
 
 	
