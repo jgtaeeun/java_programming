@@ -45,5 +45,6 @@ public class DriveLoading2 {
 		}catch (Exception e) {
 			System.out.println("DB가 없음" + e.getMessage());
 		}
+		
 	}
 }

@@ -74,9 +74,11 @@ public class DriveLoading3 {
 	public static void main(String[] args) throws Exception {
 		
 		
-		String url;
-		String user;
-		String password;
+		String url=null;
+		String user=null;
+		String password=null;
+		Connection con=null;
+		Statement st=null;
 		try {
 			
 			Scanner sc = new Scanner(System.in);
@@ -87,12 +89,12 @@ public class DriveLoading3 {
 			System.out.print("password 입력하세요: ");
 			password=sc.next();
 			
-			Connection con =DriverManager.getConnection(url, user, password);
+			con =DriverManager.getConnection(url, user, password);
 
 			System.out.println("연결 성공");
 			
 			
-			Statement st = con.createStatement();
+			st = con.createStatement();
 			
 			while (true) {
 				System.out.println();
@@ -119,13 +121,13 @@ public class DriveLoading3 {
 				}
 				
 			}
-//			st.close();
-//			con.close();
-			
+//			
 		}
 		catch (Exception e){
 			System.out.println("연결 실패");
 		}
+		st.close();
+		con.close();
 		
 		
 	}
