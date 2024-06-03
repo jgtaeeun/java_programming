@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 class Member {
 	private int id;
@@ -45,6 +47,13 @@ public class insertSQL_class {
 		return pt.executeUpdate();
 	}
 	
+	public int deleteUser(Connection con) throws SQLException {
+		Statement st= con.createStatement();
+		int ret=st.executeUpdate("delete from member");
+		st.close();
+		System.out.println("deleted: " + ret);
+		return ret;
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -68,7 +77,7 @@ public class insertSQL_class {
 				count+=insertUser(pt,member);
 			}
 			
-			
+		
 			pt.close();
 			con.close();
 			
