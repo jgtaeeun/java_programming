@@ -124,16 +124,16 @@ public class Test_중복없는리스트합병 {
 		//	System.out.println("입력 스트링: s1 = " + s1);
 		//	System.out.println("입력 스트링: s2 = " + s2);
 			
-			String[] sarray1 = s1.split(",");// [,\\s]+\r\n은 쉼표나 공백이 하나 이상 나오고 이어서 캐리지 리턴과 개행 문자가 있는 패턴
-			String[] sarray2 = s2.split(",");//file에서 enter키는 \r\n으로 해야 분리됨
-		//	showData("스트링 배열 sarray1", sarray1); System.out.println(sarray1.length);
-		//	showData("스트링 배열 sarray2", sarray2); System.out.println(sarray2.length);
+			String[] sarray1 = s1.split("[,\\s\\r\\n]+");// [,\\s\\r\\n]+은 쉼표나 공백이 하나 이상 나오고 이어서 캐리지 리턴과 개행 문자가 있는 패턴
+			String[] sarray2 = s2.split("[,\\s\\r\\n]+");//file에서 enter키는 \r\n으로 해야 분리됨
+			showData("[,\\\\s\\\\r\\\\n]+실행 후 :스트링 배열 sarray1", sarray1); System.out.println(sarray1.length);
+			showData("[,\\\\s\\\\r\\\\n]+실행 후 :스트링 배열 sarray2", sarray2); System.out.println(sarray2.length);
 			
 			trimSpace(sarray1);
 			trimSpace(sarray2);
 			
-		//	showData("trimSpace() 실행후 :스트링 배열 sarray1", sarray1) ;  System.out.println(sarray1.length);
-		//	showData("trimSpace() 실행후 :스트링 배열 sarray2", sarray2); System.out.println(sarray2.length);
+			showData("trimSpace() 실행후 :스트링 배열 sarray1", sarray1) ;  System.out.println(sarray1.length);
+			showData("trimSpace() 실행후 :스트링 배열 sarray2", sarray2); System.out.println(sarray2.length);
 		//	System.out.println("+++++++\n");
 			
 			// 방법1

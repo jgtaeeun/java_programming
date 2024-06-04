@@ -38,7 +38,7 @@ public class member_cstate {
 		try  {
 			System.out.print("삭제하고자 하는 id 입력: ");int selectid =sc.nextInt();
 			Statement st = con.createStatement();
-			st.executeUpdate(sql+ String.format("where id =%d",selectid));
+			st.executeUpdate(sql+ String.format(" where id =%d",selectid));
 			st.close();
 			System.out.println("delete 완료");
 		}
