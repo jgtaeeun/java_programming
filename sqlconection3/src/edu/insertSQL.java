@@ -51,6 +51,7 @@ public class insertSQL {
 		}
 		
 		rs.close();
+		st.close();
 	}
 	
 	static void query1(Connection con, int id, String pass, String name) throws SQLException {
