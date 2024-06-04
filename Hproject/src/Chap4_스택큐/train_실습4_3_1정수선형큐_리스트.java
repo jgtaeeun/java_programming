@@ -38,13 +38,12 @@ class Queue4 {
 
 //--- 큐에 데이터를 인큐 ---//
 	public int enque(int x) throws OverflowQueueException {
-		if (front==rear && front==0 && que.size() == capacity) {
+		if (rear >= capacity) {
 			new OverflowQueueException();
 		}
-		else if  ( que.size() != capacity) {
+		else {
 			que.add(x);
 			rear+=1;
-			front=que.size()-rear;
 		}
 		
 		return x;
@@ -52,28 +51,48 @@ class Queue4 {
 
 //--- 큐에서 데이터를 디큐 ---//
 	public int deque() throws EmptyQueueException {
-		if (front==rear && front==0 && que.size() == 0) {
+		int x =0;
+	
+		if (front==rear) {
 			new EmptyQueueException();
 		}
-		else if (que.size() <= capacity) {
-			que.remove(front);
-			front+=1;
+		else {
+			x=que.remove(0);
+			front=0; 
+			rear--;
 		}
+		return x;
 	}
 
 //--- 큐에서 데이터를 피크(프런트 데이터를 들여다봄) ---//
 	public int peek() throws EmptyQueueException {
-
+		int x =0;
+		if (front==rear) {
+			new EmptyQueueException();
+		}
+		else{
+			x = que.get(rear-1);
+		}
+		return x;
 	}
 
 //--- 큐를 비움 ---//
 	public void clear() {
-		num = front = rear = 0;
+		 front = rear = 0;
+		 que.clear();
 	}
 
 //--- 큐에서 x를 검색하여 인덱스(찾지 못하면 –1)를 반환 ---//
 	public int indexOf(int x) {
-
+		if (front==rear) {
+			new EmptyQueueException();
+		}
+		else {
+			for(int i=0; i<rear; i++) {
+				if (que.get(i)==x )  return i;
+			}
+		}
+		return -1;
 	}
 
 //--- 큐의 크기를 반환 ---//
@@ -83,31 +102,85 @@ class Queue4 {
 
 //--- 큐에 쌓여 있는 데이터 개수를 반환 ---//
 	public int size() {
-		return num;
+		return rear;
 	}
 
 //--- 큐가 비어있는가? ---//
 	public boolean isEmpty() {
-		return num <= 0;
+		return rear<=0;
 	}
 
 //--- 큐가 가득 찼는가? ---//
 	public boolean isFull() {
-		return num >= capacity;
+		return rear>= capacity;
 	}
 
 //--- 큐 안의 모든 데이터를 프런트 → 리어 순으로 출력 ---//
 	public void dump() {
-
+		if (front==rear) {
+			new EmptyQueueException();
+			System.out.println("큐가 비어있습니다.");
+		}
+		else {
+			System.out.println("큐 데이터 프런트->리어 순으로 출력");
+			for (int i = 0; i<rear ; i++) {
+				System.out.print(que.get(i)+" ");
+			}
+		}
 	}
 }
 
 
 
 public class train_실습4_3_1정수선형큐_리스트 {
+	public static void main(String[] args) {
+	Scanner stdIn = new Scanner(System.in);
+	Queue4 oq = new Queue4(4); // 최대 4개를 인큐할 수 있는 큐
+	Random random = new Random();
+	int rndx = 0, p = 0;
 
-	public train_실습4_3_1정수선형큐_리스트() {
-		// TODO Auto-generated constructor stub
-	}
+	while (true) {
+		System.out.println(" "); // 메뉴 구분을 위한 빈 행 추가
+		System.out.printf("현재 데이터 개수: %d / %d\n", oq.size(), oq.getCapacity());
+		System.out.print("(1)인큐　(2)디큐　(3)피크　(4)덤프　(0)종료: ");
+		int menu = stdIn.nextInt();
+		
+		switch (menu) {
+		case 1: // 인큐
+			rndx = random.nextInt(20);
+			System.out.print("입력데이터: (" + rndx +")");
+			try {
+				oq.enque(rndx);
+			} catch(Chap4_스택큐.Queue4.OverflowQueueException e) {
+				System.out.println("stack이 가득찼있습니다.");
+			}
+			break;
 
-}
+		case 2: // 디큐
+			try {
+				p = oq.deque();
+				System.out.println("디큐한 데이터는 " + p + "입니다.");
+			} catch (Chap4_스택큐.Queue4.EmptyQueueException e) {
+				System.out.println("큐가 비어 있습니다.");
+			}
+			break;
+
+		case 3: // 피크
+			try {
+				p = oq.peek();
+				System.out.println("피크한 데이터는 " + p + "입니다.");
+			} catch (Chap4_스택큐.Queue4.EmptyQueueException e) {
+				System.out.println("큐가 비어 있습니다.");
+			}
+			break;
+
+		case 4: // 덤프
+			oq.dump();
+			break;
+		default:
+			break;
+		}//switch
+	}//while
+	}//main
+}//class
+	
