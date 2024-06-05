@@ -16,6 +16,7 @@ class IntQueue3 {
 	private int capacity; // 큐의 크기
 	private int front; // 맨 처음 요소 커서
 	private int rear; // 맨 끝 요소 커서
+	boolean emptyTag;
 
 //--- 실행시 예외: 큐가 비어있음 ---//
 	public class EmptyIntQueue3Exception extends RuntimeException {
@@ -33,7 +34,7 @@ class IntQueue3 {
 	public IntQueue3(int maxlen) {
 		capacity = maxlen;
 		front=rear=0;
-		
+		emptyTag=true;
 		try {
 			que=new int [capacity];
 		}
@@ -45,15 +46,14 @@ class IntQueue3 {
 	//--- 큐에 데이터를 인큐 ---//
 	public int enque(int x) throws OverflowIntQueue3Exception {
 		//큐 배열이 다 채워져 있을 경우,
-		if (front==rear && (front==0||front==1 || front==2 ||front==3) && que[0]!=0 &&que[1]!=0 && que[2]!=0 && que[3]!=0 ) {
+		if (front==rear && emptyTag==false) {
 			new OverflowIntQueue3Exception();
 		}
 		else {
-			que[rear++]=x;
-			
-			if (rear == capacity) {
-				rear=0;
-			}
+			que[rear]=x;
+			emptyTag=false;
+			rear=(rear+1)%capacity;
+
 		}
 		
 		return x;
@@ -67,16 +67,16 @@ class IntQueue3 {
 		
 		int x =0;
 		
-		if(front==rear &&(front==0||front==1 || front==2 ||front==3)&& que[0]==0 &&que[1]==0 && que[2]==0 && que[3]==0 ) {
+		if(front==rear && emptyTag==true ) {
 				new EmptyIntQueue3Exception();
 		}
 		else {
 			x = que[front];
-			que[front]=0;
-			front++;
 			
-			if (front==capacity) {
-				front=0;
+			front=(front+1)%capacity;
+			
+			if (front==rear) {
+				emptyTag=true;
 			}
 		
 		}
@@ -87,7 +87,7 @@ class IntQueue3 {
 	public int peek() throws EmptyIntQueue3Exception {
 	
 		
-		if(front==rear && front==0 && que[0]==0 &&que[1]==0 && que[2]==0 && que[3]==0 ) {
+		if(front==rear && emptyTag==true ) {
 			new EmptyIntQueue3Exception();
 		}
 		
@@ -97,50 +97,34 @@ class IntQueue3 {
 	//--- 큐를 비움 ---//
 	public void clear() {
 			front=rear=0;
-			for (int i=0 ; i<que.length ; i++) {
-				que[i]=0;
-			}
+			emptyTag=true;
 	}
 	
 	//--- 큐에 쌓여 있는 데이터 개수를 반환 ---//
 	public int size() {
-		if(front==rear && (front==0||front==1||front==2||front==3) && que[0]==0 &&que[1]==0 && que[2]==0 && que[3]==0 ) return 0;
-		else if (front==rear && (front==0||front==1||front==2||front==3) && que[0]!=0 &&que[1]!=0 && que[2]!=0 && que[3]!=0 )  return capacity;
-		else if ( front!=rear &&  front==0) {
-			if (que[1]==0 && que[2]==0 && que[3]==0) return  1;
-			else if (que[2]==0 &&que[3]==0) return 2;
-			else if (que[3]==0)return 3;
+		if(front==rear && emptyTag==true ) {
+			new EmptyIntQueue3Exception();
 		}
-		else if ( front!=rear &&  front==1) {
-			if (que[0]==0 && que[2]==0 && que[3]==0) return  1;
-			else if (que[0]==0 &&que[3]==0) return 2;
-			else if (que[0]==0 ) return 3;
-		}
-		else if ( front!=rear &&  front==2) {
-			if (que[0]==0 && que[1]==0 && que[3]==0) return  1;
-			else if (que[0]==0 &&que[1]==0) return 2;
-			else if (que[1]==0 ) return 3;
-		}
-		else if ( front!=rear &&  front==3) {
-			if (que[0]==0 && que[2]==0 && que[1]==0) return  1;
-			else if (que[1]==0 &&que[2]==0) return 2;
-			else if (que[2]==0 ) return 3;
-		}
-		return -1;	
+		if (rear > front) return rear-front;
+		else if (rear < front) return rear+(capacity-front);
+		else if (front==rear && emptyTag==false ) return capacity;
+		return 0;
 	}
 	
 	//--- 큐에서 x를 검색하여 인덱스(찾지 못하면 –1)를 반환 ---//
 	public int indexOf(int x) {
-		if(front==rear && front==0 && que[0]==0 &&que[1]==0 && que[2]==0 && que[3]==0 ) {
+		if(isEmpty()==true) {
 			new EmptyIntQueue3Exception();
 		}
-		
-		for (int i=0 ; i<que.length ; i++) {
-			if (que[i]==x) return i ;
+		else {
+			for (int i=0 ; i<que.length ; i++) {
+				if (que[i]==x) return i ;
+			}
+			
 		}
-		
 		return -1;
 	}
+	
 	//--- 큐의 크기를 반환 ---//
 	public int getCapacity() {
 			return capacity;
@@ -148,17 +132,21 @@ class IntQueue3 {
 	
 	//--- 큐가 비어있는가? ---//
 	public boolean isEmpty() {
-			return que[0]==0 &&que[1]==0 && que[2]==0 && que[3]==0 ;
-		}
+		if (emptyTag==true && front==rear)
+			return true ;
+		else return false;
+	}
 	//--- 큐가 가득 찼는가? ---//
 	public boolean isFull() {
-			return que[0]!=0 &&que[1]!=0 && que[2]!=0 && que[3]!=0 ;
+		if (emptyTag==false && front==rear)
+			return true ;
+		else return false;
 	}
 	
 	
 	//--- 큐 안의 모든 데이터를 프런트 → 리어 순으로 출력 ---//
 	public void dump() {
-		if(front==rear && front==0 && que[0]==0 &&que[1]==0 && que[2]==0 && que[3]==0 ){
+		if(emptyTag==true && front==rear){
 			new EmptyIntQueue3Exception();
 			System.out.println("큐가 비어있습니다.");
 		}
