@@ -128,3 +128,13 @@ Arrays.sort  Collections.sort
 리스트 출력 :::for-each로 출력
 
 25)*try-catch-resources 
+========================================================================================
+자료구조
+Exception -RunTimeException-EmptyIntQueue3Exception
+
+RunTimeException 생성자는 Exception의 생성자 상속 
+EmptyIntQueue3Exception는 RunTimeException 생성자 상속
+=>super();
+
+1)스택(정수or객체 x 배열or리스트 =>구현방법 4가지)
+2)큐(선형/원형)(정수or객체 x 배열or리스트x선형 or 원형  =>구현방법8가지)

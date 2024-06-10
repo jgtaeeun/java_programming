@@ -1,5 +1,6 @@
 package javahong;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,12 @@ class Point {
 	private int ix;
 	private int iy;
 
+=======
+class Point {
+	private int ix;
+	private int iy;
+
+>>>>>>> 9a7204ff4f07964c06dab7c76dc59cf5164edcb8
 	public Point(int x, int y) {
 		ix = x;
 		iy = y;
@@ -23,6 +30,10 @@ class Point {
 	public boolean equals(Object p) {
 		return this.equals(p);
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 9a7204ff4f07964c06dab7c76dc59cf5164edcb8
 	public int getix() {
 		return ix;
 	}
@@ -141,6 +152,7 @@ class Stack4 {
 
 
 public class Test_QueenEight_구현과제_최종수정본 {
+<<<<<<< HEAD
 	public static void EightQueen(int[][] d) throws EmptyGenericStackException  {
 		int count = 0;// 퀸 배치 갯수
 		int numberSolutions = 0;
@@ -213,26 +225,98 @@ public class Test_QueenEight_구현과제_최종수정본 {
 			}
 		}
 		System.out.println(numberSolutions);
+=======
+	public static void EightQueen(int[][] d)  {
+		int count = 0;// 퀸 배치 갯수
+		int numberSolutions = 0;
+		int ix = 0, iy = 0;// 행 ix, 열 iy
+		Stack4 st = new Stack4(100); // 100개를 저장할 수 있는 스택을 만들고
+		Point p = new Point(ix, iy);// 현 위치를 객체로 만들고
+		d[7-ix][7-iy] = 1;// 현 위치에 queen을 넣었다는 표시를 하고
+		count++;
+		iy++;
+		st.push(p);// 스택에 현 위치 객체를 push
+		
+		while (true) {
+				if (count<64) {
+					Point p1 = new Point(ix, iy);
+					count++;
+					st.push(p1);
+					iy++;
+					if (iy >=8) {iy=0; ix++;}
+					continue;
+				}
+
+				if (st.isEmpty()==false){
+				
+					try {
+						Point p_current=st.peek();
+						ix=p_current.getix();
+						iy=p_current.getiy();
+						
+						d[ix][iy] = 1;// 현 위치에 queen을 넣었다는 표시를 하고
+						count=1;
+//						
+						st.pop();
+						iy--;
+						while (true) {
+//						//iy가 0이 될 경우 , ix--해야함
+							if (iy<0) {ix--; iy=7;}
+							if (ix<0) break;
+//							
+							if (nextMove(d, ix, iy)!=-1) {
+								d[ix][iy]=1;
+								count++;
+							}
+							if (count==8) {numberSolutions+=1;}
+							iy--;
+						}
+//						
+//						
+					} catch (EmptyGenericStackException e) {
+//						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					continue;
+					
+				}	
+			
+				System.out.println(numberSolutions);
+				
+				break;
+				
+		}
+>>>>>>> 9a7204ff4f07964c06dab7c76dc59cf5164edcb8
 	}
 	
 	public static boolean checkRow(int[][] d, int crow) { //배열 d에서 행 crow에 퀸을 배치할 수 있는지 조사
 		for (int i=0 ;i<8 ;i++) {
+<<<<<<< HEAD
 			   if (d[crow][i] == 1) 
+=======
+			   if (d[crow][i]!=0) 
+>>>>>>> 9a7204ff4f07964c06dab7c76dc59cf5164edcb8
 				   return false; 
 		}
 		return true;
 	}
 
 	public static boolean checkCol(int[][] d, int ccol) {//배열 d에서 열 ccol에 퀸을 배치할 수 있는지 조사
+<<<<<<< HEAD
 		
 		for (int i=0 ;i<8 ;i++) {
 			   if (d[i][ccol]==1) 
+=======
+		for (int i=0 ;i<8 ;i++) {
+			   if (d[i][ccol]!=0) 
+>>>>>>> 9a7204ff4f07964c06dab7c76dc59cf5164edcb8
 				   return false; 
 		}
 		return true;
 	}
 	//배열 d에서 행 cx, 열 cy에 퀸을 남서, 북동 대각선으로 배치할 수 있는지 조사
 	public static boolean checkDiagSW(int[][] d, int cx, int cy) { // x++, y-- or x--, y++ where 0<= x,y <= 7
+<<<<<<< HEAD
 		int x = cx, y = cy;
 		while (x>=0 && x <d.length && y>=0 && y <d.length) {
 			x++;y--;
@@ -267,11 +351,99 @@ public class Test_QueenEight_구현과제_최종수정본 {
 				if (d[x][y] == 1)
 					return false;
 		}
+=======
+		if (cx+cy==7)
+			for(int x=0;x<8;x++){
+				if  (d[x][7-x]!=0) return false;}
+		else if (cy+cx==6)	
+			for(int x=0;x<7;x++){
+				if  (d[x][6-x]!=0) return false;}
+		else if (cy+cx==5)	
+			for(int x=0;x<6;x++){
+				if  (d[x][5-x]!=0) return false;}
+		else if (cy+cx==4)	
+			for(int x=0;x<5;x++){
+				if  (d[x][4-x]!=0) return false;}
+		else if (cy+cx==3)	
+			for(int x=0;x<4;x++){
+				if  (d[x][3-x]!=0) return false;}
+		else if (cy+cx==2)	
+			for(int x=0;x<3;x++){
+				if  (d[x][2-x]!=0) return false;}
+		else if (cy+cx==1)	
+			for(int x=0;x<2;x++){
+				if  (d[x][1-x]!=0) return false;}
+		else if (cy+cx==8)	
+			for(int x=1;x<8;x++){
+				if  (d[x][8-x]!=0) return false;}
+		else if (cy+cx==9)	
+			for(int x=2;x<8;x++){
+				if  (d[x][9-x]!=0) return false;}
+		else if (cy+cx==10)	
+			for(int x=3;x<8;x++){
+				if  (d[x][10-x]!=0) return false;}
+		else if (cy+cx==11)	
+			for(int x=4;x<8;x++){
+				if  (d[x][11-x]!=0) return false;}
+		else if (cy+cx==12)	
+			for(int x=5;x<8;x++){
+				if  (d[x][12-x]!=0) return false;}
+		else if (cy+cx==13)	
+			for(int x=6;x<8;x++){
+				if  (d[x][13-x]!=0) return false;}
+		else if ((cx+cy==0)||(cx+cy==14))return false;
+>>>>>>> 9a7204ff4f07964c06dab7c76dc59cf5164edcb8
 		return true;
 	}
 
 	//배열 d에서 행 cx, 열 cy에 퀸을 남동, 북서 대각선으로 배치할 수 있는지 조사
+<<<<<<< HEAD
 	
+=======
+	public static boolean checkDiagSE(int[][] d, int cx, int cy) {// x++, y++ or x--, y--
+		if (cx==cy)
+			for(int x=0;x<8;x++){
+				if ( d[x][x]!=0) return false;}
+		else if (cx-cy==1)
+			  for(int x=0;x<7;x++){
+			   if     (d[x+1][x]!=0) return false;}
+		else if (cy-cx==1)
+			  for(int x=0;x<7;x++){
+			   if (d[x][x+1]!=0) return false;}
+		else if (cx-cy==2)
+			  for(int x=0;x<6;x++){
+			   if     (d[x+2][x]!=0) return false;}
+		else if (cy-cx==2)
+			  for(int x=0;x<6;x++){
+			   if (d[x][x+2]!=0) return false;}
+		else if (cx-cy==3)
+			  for(int x=0;x<5;x++){
+			   if     (d[x+3][x]!=0) return false;}
+		else if (cy-cx==3)
+			  for(int x=0;x<5;x++){
+			   if (d[x][x+3]!=0) return false;}
+		else if (cx-cy==4)
+			  for(int x=0;x<4;x++){
+			   if     (d[x+4][x]!=0) return false;}
+		else if (cy-cx==4)
+			  for(int x=0;x<4;x++){
+			   if (d[x][x+4]!=0) return false;}
+		else if (cx-cy==5)
+			  for(int x=0;x<3;x++){
+			   if     (d[x+5][x]!=0) return false;}
+		else if (cy-cx==5)
+			  for(int x=0;x<3;x++){
+			   if (d[x][x+5]!=0) return false;}
+		else if (cx-cy==6)
+			  for(int x=0;x<2;x++){
+			   if     (d[x+6][x]!=0) return false;}
+		else if (cy-cx==6)
+			  for(int x=0;x<2;x++){
+			   if (d[x][x+6]!=0) return false;}
+		else if ((cx-cy==7) || (cy-cx==7)) return false;
+		return true;
+	}
+>>>>>>> 9a7204ff4f07964c06dab7c76dc59cf5164edcb8
 	//배열 d에서 (x,y)에 퀸을 배치할 수 있는지  조사
 	public static boolean checkMove(int[][] d, int x, int y) {// (x,y)로 이동 가능한지를 check
 		if (checkCol(d,x)&&checkRow(d,y)&&checkDiagSW(d,x,y)&&checkDiagSE(d,x,y)) return true;
@@ -279,12 +451,17 @@ public class Test_QueenEight_구현과제_최종수정본 {
 	}
 	//배열 d에서 현재 위치(row,col)에 대하여 다음에 이동할 위치 nextCol을 반환, 이동이 가능하지 않으면 -1를 리턴
 	public static int nextMove(int[][] d, int row, int col) {// 현재 row, col에 대하여 이동할 col을 return
+<<<<<<< HEAD
 		int y = col;
 		while (y < d.length) {
 			if (checkMove(d,row, y))
 				return y;
 			y++;
 		}
+=======
+		if (checkMove(d,row, col))
+			return col;
+>>>>>>> 9a7204ff4f07964c06dab7c76dc59cf5164edcb8
 		return  -1;
 	}
 
@@ -296,7 +473,11 @@ public class Test_QueenEight_구현과제_최종수정본 {
 		}
 	}
 	
+<<<<<<< HEAD
 	public static void main(String[] args) throws EmptyGenericStackException {
+=======
+	public static void main(String[] args) {
+>>>>>>> 9a7204ff4f07964c06dab7c76dc59cf5164edcb8
 		int row = 8, col = 8;
 		int[][] data = new int[8][8];
 		for (int i = 0; i < data.length; i++)
@@ -309,4 +490,9 @@ public class Test_QueenEight_구현과제_최종수정본 {
 
 
 
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> 9a7204ff4f07964c06dab7c76dc59cf5164edcb8
