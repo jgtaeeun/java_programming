@@ -154,39 +154,44 @@ public class Test_QueenEight_구현과제_최종수정본 {
 		int numberSolutions = 0;
 		int ix = 0, iy = 0;// 행 ix, 열 iy
 		Stack4 st = new Stack4(100); // 100개를 저장할 수 있는 스택을 만들고
-		Point p = new Point(ix, iy);// 현 위치를 객체로 만들고
-		d[ix][iy] = 1;// 현 위치에 queen을 넣었다는 표시를 하고
-		count++;
-		//iy++;
-		st.push(p);// 스택에 현 위치 객체를 push
-		while (true) {
+			while (true) {
+			Point p = new Point(ix, iy);// 현 위치를 객체로 만들고
+			Point tmp =null;
+			d[ix][iy] = 1;// 현 위치에 queen을 넣었다는 표시를 하고
+			count++;
+			st.push(p);// 스택에 현 위치 객체를 push
+			
 			int i = ix; //0
 			int j = iy; //0
 			i++;
 		    while(!st.isEmpty()) {
 		    	int newY=nextMove(d, i, j); //1.0
+		    	
 		    	if (newY<0) {
-		    		p=st.pop();
-					i=p.getix();
-					j=p.getiy();
-					d[i][j]=0;
+		    		tmp=st.pop();
+					i= tmp.getix();
+					j= tmp.getiy()+1;
+					
+					d[i][j-1]=0;
 					count--;
-					j=j+1;
+					
 					
 					//continue;
 					
 					
 		    	}
 		    	else {
+		    		p=new Point(i, newY);
+		    		st.push(p);		  
 		    		d[i][newY]=1;
 		    		System.out.println("next좌표"+i+","+newY);
 		    		count++;
 		    		i++; j=0;
 		    		  //1.2
-		    		
+		    	if (count==8) {numberSolutions +=1;}
 		    	}
 		    }//while문
-			if (count==8) {numberSolutions +=1;}
+			
 			count=0; 
 			
 			if(iy==7) break;
