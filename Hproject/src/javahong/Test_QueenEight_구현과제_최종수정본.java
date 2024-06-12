@@ -157,12 +157,12 @@ public class Test_QueenEight_구현과제_최종수정본 {
 		Point p = new Point(ix, iy);// 현 위치를 객체로 만들고
 		d[ix][iy] = 1;// 현 위치에 queen을 넣었다는 표시를 하고
 		count++;
-		iy++;
+		ix++;
 		st.push(p);
 		
 		while (true) {
 			
-		    if (st.isEmpty()) {System.out.println("해: " + numberSolutions); break;}
+		    if (st.isEmpty() && ix==0 && iy==8) {System.out.println("해: " + numberSolutions); break;}
 		    	
 		    else {
 		    	int newY=nextMove(d, ix, iy); //1.0
@@ -174,14 +174,17 @@ public class Test_QueenEight_구현과제_최종수정본 {
 					d[ix][iy]=0;
 					count--;
 					iy++;
+					
 					continue;
 		    	}
 		    	else {//넣을 수 있다
 		    		d[ix][newY]=1;
-		    		System.out.println("next좌표"+ix+","+newY);
+		    		//System.out.println("next좌표"+ix+","+newY);
 		    		count++;
+		    		//iy=newY;
+		    		st.push(new Point(ix, newY));
 		    		ix++; iy=0;
-		    		
+		    		//st.dump();
 		    		if (count == d.length) {
 		    			numberSolutions++;
 		    			p = st.pop();
@@ -190,6 +193,7 @@ public class Test_QueenEight_구현과제_최종수정본 {
 						count--;
 						d[ix][iy] = 0;
 						iy++;
+					
 						continue;
 		    		}
 		    	
