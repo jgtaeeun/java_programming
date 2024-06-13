@@ -86,7 +86,8 @@ class Stack4 {
 	public Point pop() throws EmptyGenericStackException {
 		if (top <= 0) // 스택이 비어있음
 			System.out.println("pop: stack empty");
-		return data.get(--top) ;
+		top--;
+		return data.remove(top); 
 	}
 
 	// --- 스택에서 데이터를 피크(peek, 정상에 있는 데이터를 들여다봄) ---//
