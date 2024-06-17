@@ -162,6 +162,7 @@ public static void EightQueen(int[][] d) throws EmptyGenericStackException   {
 	
 	while (true) {
 		
+<<<<<<< HEAD
 	    if (st.isEmpty() && ix==0 && iy==8) {System.out.println("해: " + numberSolutions); break;}
 	    	
 	    else {
@@ -201,6 +202,59 @@ public static void EightQueen(int[][] d) throws EmptyGenericStackException   {
 	    }
 	}
 	
+=======
+		int count = 0;// 퀸 배치 갯수
+		int numberSolutions = 0;
+		int ix = 0, iy = 0;// 행 ix, 열 iy
+		Stack4 st = new Stack4(100); // 100개를 저장할 수 있는 스택을 만들고
+		Point p = new Point(ix, iy);// 현 위치를 객체로 만들고
+		d[ix][iy] = 1;// 현 위치에 queen을 넣었다는 표시를 하고
+		count++;
+		ix++;
+		st.push(p);
+		
+		while (true) {
+			
+		    if (st.isEmpty() && ix==0 && iy==8) {System.out.println("해: " + numberSolutions); break;}
+		    	
+		    else {
+		    	int newY=nextMove(d, ix, iy); //1.0
+		    	
+		    	if (newY<0) {
+		    		p=st.pop();
+					ix=p.getix();
+					iy=p.getiy();
+					d[ix][iy]=0;
+					count--;
+					iy++;
+					
+					continue;
+		    	}
+		    	else {//넣을 수 있다
+		    		d[ix][newY]=1;
+		    		//System.out.println("next좌표"+ix+","+newY);
+		    		count++;
+		    		//iy=newY;
+		    		st.push(new Point(ix, newY));
+		    		ix++; iy=0;
+		    		//st.dump();
+		    		if (count == d.length) {
+		    			numberSolutions++;
+		    			p = st.pop();
+		    			ix=p.getix();
+						iy=p.getiy();
+						count--;
+						d[ix][iy] = 0;
+						iy++;
+					
+						continue;
+		    		}
+		    	
+		    	}
+		    }
+		}
+		
+>>>>>>> 10f28c6f1ecd7cae2c05aeab1862734d8a780df8
 
 		
 	}
