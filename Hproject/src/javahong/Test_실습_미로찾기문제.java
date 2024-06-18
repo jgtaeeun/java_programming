@@ -7,6 +7,7 @@ import java.util.Random;
 
 import javahong.Stack5.EmptyGenericStackException;
 
+<<<<<<< HEAD
 
 
 class Items {
@@ -15,6 +16,14 @@ class Items {
 	int dir;
 
 	public Items (int x, int y, int  dir) {
+=======
+class Items{
+	 int x;
+	 int y;
+	 int dir;
+	
+	public Items(int x, int y,  int dir) {
+>>>>>>> 083666de0e91de144b983eb5c23da5542601ed6f
 		this.x=x;
 		this.y=y;
 		this.dir=dir;
@@ -24,23 +33,29 @@ class Items {
 	}
 
 }
-	
 
 class Offsets {
-	 int a;
-	 int b;
+	int a;
+	int b;
 	
-	
-		
 	public Offsets (int a, int b) {
-			this.a=a;
-			this.b=b;
+		this.a=a;
+		this.b=b;
 	}
 	public String toString() {
+<<<<<<< HEAD
 			return "("+a+","+b+")";
 	}
 	
+=======
+		return "("+a+","+b+")";
+	}
+>>>>>>> 083666de0e91de144b983eb5c23da5542601ed6f
 }
+
+
+enum Directions {N, NE, E, SE, S, SW, W, NW ;}
+	
 
 class Stack5 {
 	// --- 실행시 예외: 스택이 비어있음 ---//
@@ -93,8 +108,13 @@ class Stack5 {
 		 if (top <= 0) {
 		        throw new EmptyGenericStackException("pop: stack empty"); // 예외를 던지도록 수정
 		 }
+<<<<<<< HEAD
 		top--;
 		return data.remove(top); 
+=======
+		 top--;
+		 return data.remove(top);
+>>>>>>> 083666de0e91de144b983eb5c23da5542601ed6f
 	}
 	
 	public Items peek() throws EmptyGenericStackException {
@@ -150,7 +170,13 @@ class Stack5 {
 	}
 }
 public class Test_실습_미로찾기문제 {
+static Offsets[] moves = new Offsets[8];//static을 선언하는 이유를 알아야 한다
+	
+//	offsets moves[8];
+	static int maze[][]=new int[14][17];
+	static int mark[][]=new int[14][17];
 
+<<<<<<< HEAD
 	static Offsets[] moves = new Offsets[8];//static을 선언하는 이유를 알아야 한다
 	
 	
@@ -211,18 +237,76 @@ public class Test_실습_미로찾기문제 {
 			//mark[ix][iy]=0;
 		}
 	
+=======
+	public static void path(int maze[][], int mark[][], int m, int p) throws JavaProgramming.Stack5.EmptyGenericStackException {
+		Random random = new Random();
+		int ix = 1, iy = 1, dir =2;// 행 ix, 열 iy
+		Stack5 st = new Stack5(100); // 100개를 저장할 수 있는 스택을 만들고
+		Items p1 ;
+		
+		
+		while (true) {
+			p1 = new Items(ix, iy, dir);// 현 위치를 객체로 만들고
+			st.push(p1);
+			
+			int g = ix + moves[dir].a;
+		    int h = iy + moves[dir].b;
+		    
+			//도착 위치 좌표일 경우,
+		    if ((g == m) && (h == p))  { mark[g][h] = 1; System.out.println("미로 탈출"); break;}
+		    
+		   
+	         // 미로 범위 안에 있고, 벽이 아니며 방문하지 않았다면
+	        if ((maze[g][h] == 0 && mark[g][h] == 0)) {
+	        	ix=g;
+	        	iy=h;
+	        	dir=random.nextInt(8);
+	        	mark[g][h]=1;
+	        	System.out.println(g+","+h);
+	        	continue;
+	        	   
+	        }
+
+            // 벽인 경우
+            if (maze[g][h] == 1) {
+                p1 = st.pop();
+                ix = p1.x;
+                iy = p1.y;
+                dir = random.nextInt(8);
+                mark[g][h] = 1;
+                continue;
+            }
+
+            // 방문한 곳인 경우
+            if ((maze[g][h] == 0 && mark[g][h] == 1)) {
+                p1 = st.pop();
+        
+                p1 = st.peek();
+                ix = p1.x;
+                iy = p1.y;
+                dir = random.nextInt(8);
+                continue;
+            }
+
+        
+	    }
+		    
+
+>>>>>>> 083666de0e91de144b983eb5c23da5542601ed6f
 		
 	}
 	
-	
-	  
-	
+	public static void main(String[] args) throws JavaProgramming.Stack5.EmptyGenericStackException {
 
+<<<<<<< HEAD
 	public static void main(String[] args) throws EmptyGenericStackException {
 		int[][] maze = new int[14][17];
 		int[][] mark = new int[14][17];
 
 		int input[][] = { // 12 x 15
+=======
+		int input[][]= {
+>>>>>>> 083666de0e91de144b983eb5c23da5542601ed6f
 				{ 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1 },
 				{ 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1 },
 				{ 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1 },
@@ -234,8 +318,10 @@ public class Test_실습_미로찾기문제 {
 				{ 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1 },
 				{ 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0 },
 				{ 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 },
-				{ 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0 }};
+				{ 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0 },};
 		
+		
+
 		for (int ia = 0; ia < 8; ia++)
 			moves[ia] = new Offsets(0, 0);//배열에 offsets 객체를 치환해야 한다.
 		moves[0].a = -1;	moves[0].b = 0;
@@ -246,6 +332,7 @@ public class Test_실습_미로찾기문제 {
 		moves[5].a = 1;		moves[5].b = -1;
 		moves[6].a = 0;		moves[6].b = -1;
 		moves[7].a = -1;	moves[7].b = -1;
+<<<<<<< HEAD
 		
 
 //Directions {N, NE, E, SE, S, SW, W, NW}
@@ -269,16 +356,29 @@ public class Test_실습_미로찾기문제 {
 				}
 				//System.out.println("test");
 					
+=======
+		//maze 바깥 테두리
+		for (int i=0;i<14;i=i+13)
+			for(int j=0;j<17;j++) {
+				maze[i][j]=1;
+>>>>>>> 083666de0e91de144b983eb5c23da5542601ed6f
 		}
 				//mark와 maze 똑같이
 		for(int i=0;i<14;i++) {
+<<<<<<< HEAD
 					for(int j=0;j<17;j++) {
 						mark[i][j]=0;
 					}
+=======
+			for(int j=0;j<17;j++) {
+				mark[i][j]=0;
+			}
+>>>>>>> 083666de0e91de144b983eb5c23da5542601ed6f
 		}
 				
 				
 		
+<<<<<<< HEAD
 
 		show("maze[14,17]::", maze);
 		show("mark[14,17]::", mark);
@@ -287,6 +387,13 @@ public class Test_실습_미로찾기문제 {
 		show("maze[14,17]::", maze);
 		show("mark[14,17]::", mark);
 
+=======
+		
+		path(maze, mark,12, 15);
+		
+			
+		
+>>>>>>> 083666de0e91de144b983eb5c23da5542601ed6f
 
 	}
 }
