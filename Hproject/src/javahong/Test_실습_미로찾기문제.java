@@ -3,10 +3,11 @@ package javahong;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import javahong.Stack5.EmptyGenericStackException;
 
-enum Directions {N, NE, E, SE, S, SW, W, NW};
+
 
 class Items {
 	int x;
@@ -20,10 +21,6 @@ class Items {
 	}
 	public String toString() {
 		return "("+x+","+y+","+dir+")";
-	}
-	
-	public boolean equals(Object p) {
-		return this.equals(p);
 	}
 
 }
@@ -42,11 +39,7 @@ class Offsets {
 	public String toString() {
 			return "("+a+","+b+")";
 	}
-		
 	
-	public boolean equals(Object p) {
-			return this.equals(p);
-	}
 }
 
 class Stack5 {
@@ -97,8 +90,9 @@ class Stack5 {
 
 	// --- 스택에서 데이터를 팝(정상에 있는 데이터를 꺼냄) ---//
 	public Items pop() throws EmptyGenericStackException {
-		if (top <= 0) // 스택이 비어있음
-			System.out.println("pop: stack empty");
+		 if (top <= 0) {
+		        throw new EmptyGenericStackException("pop: stack empty"); // 예외를 던지도록 수정
+		 }
 		top--;
 		return data.remove(top); 
 	}
@@ -162,8 +156,8 @@ public class Test_실습_미로찾기문제 {
 	
 	public static void show(String s, int[][] a) {
 		System.out.println("<" +s+">");
-		for(int i=1;i<13;i++) {
-			for(int j=1;j<16;j++) {
+		for(int i=0;i<a.length;i++) {
+			for(int j=0;j<a[0].length;j++) {
 				System.out.print(a[i][j]+" ");
 			}
 			System.out.println();
@@ -171,45 +165,60 @@ public class Test_실습_미로찾기문제 {
 	}
 	
 
-	static void path(int maze[][], int mark[][], int m, int p) throws EmptyGenericStackException {
-		 
-		  
-		int ix = 1, iy = 1, dir =2;// 행 ix, 열 iy
+
+	
+//	offsets moves[8];
+	static int maze[][]=new int[14][17];
+	static int mark[][]=new int[14][17];
+
+	public static void path(int maze[][], int mark[][], int m, int p) throws EmptyGenericStackException  {
+		enum Directions {N, NE, E, SE, S, SW, W, NW};
+		Random random = new Random();
+		int ix = 1, iy = 1,  dir =2;// 행 ix, 열 iy
 		Stack5 st = new Stack5(100); // 100개를 저장할 수 있는 스택을 만들고
 		Items p1 ;
-		int g=0 ;int h=0 ;
-		while (true) {
-			p1 = new Items(ix, iy, dir);// 현 위치를 객체로 만들고
-			st.push(p1);
-			
-			
-		    
-			//도착 위치 좌표일 경우,
-		    if ((g == m) && (h == p))  { mark[g][h] = 1; System.out.println("미로 탈출"); break;}
-		    
-		    mark[g][h] = 1;
-		    
-		    
-		    for (Directions direction : Directions.values()) {
-	           g = ix + moves[direction.ordinal()].a;
-	           h = iy+ moves[direction.ordinal()].b;
+		p1 = new Items(ix, iy, dir);// 현 위치를 객체로 만들고
+		st.push(p1);
+		
+		while (!st.isEmpty()) {
 
-	            // 미로 범위 안에 있고, 벽이 아니며 방문하지 않았다면
-	           if (!(maze[g][h] == 0 && mark[g][h] == 0)) {
-	        	   p1=st.pop();
-	        	   
-	            }
-	        }
-		    
+			p1 = st.pop();
+			ix = p1.x; iy = p1.y; dir = p1.dir;
+			mark[ix][iy] = 0;
+			while (dir < 8) {
+				int g = ix + moves[dir].a;
+			    int h = iy + moves[dir].b;
+			  //도착 위치 좌표일 경우,
+			    if ((g == m) && (h == p))  { 
+			    	mark[ix][iy] = 1; mark[g][h] = 1;  
+			    	System.out.println("미로 탈출"); 
+			    	st.clear(); break;}
+			      // 미로 범위 안에 있고, 벽이 아니며 방문하지 않았다면
+		        if ((maze[g][h] == 0 && mark[g][h] == 0)) {
+		        	mark[ix][iy] =1;
+		        	dir++;
+		        	p1 = new Items(ix, iy, dir);
+		        	st.push(p1);
 
+		        	ix=g;
+		        	iy=h;
+		        	dir=0;//N
+		        }
+		        else {
+			          dir++;
+		        }
+			}
+			//mark[ix][iy]=0;
 		}
+	
+		
 	}
 	
 	
 	  
 	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws EmptyGenericStackException {
 		int[][] maze = new int[14][17];
 		int[][] mark = new int[14][17];
 
@@ -241,35 +250,42 @@ public class Test_실습_미로찾기문제 {
 
 //Directions {N, NE, E, SE, S, SW, W, NW}
 //             0  1  2  3   4   5  6   7		
-		for (int i=0;i<14;i=i+13)
-			for(int j=0;j<17;j++) {
-				maze[i][j]=1;
+		//maze 바깥 테두리
+//		for (int i=0;i<14;i=i+13)
+//					for(int j=0;j<17;j++) {
+//						maze[i][j]=1;
+//		}
+//		for (int i=0;i<17;i=i+16)
+//					for(int j=0;j<14;j++) {
+//					 maze[j][i]=1;
+//		}
+				//maze를 input과 똑같이 
+		for(int i=0 ;i<maze.length;i++) {
+				for (int j=0;j<maze[0].length;j++) {
+					if (i == 0 || j == 0 || i == maze.length-1 || j == maze[0].length-1)
+						maze[i][j] = 1;
+					else
+						maze[i][j]=input[i-1][j-1];
+				}
+				//System.out.println("test");
+					
 		}
-		for (int i=0;i<17;i=i+16)
-			for(int j=0;j<14;j++) {
-				maze[j][i]=1;
-		}
-		//maze를 input과 똑같이 
-		for(int i=1 ;i<13;i++) {
-			for (int j=1;j<16;j++) {
-				maze[i][j]=input[i-1][j-1];
-			}
-			
-		}
-		//mark와 maze 똑같이
+				//mark와 maze 똑같이
 		for(int i=0;i<14;i++) {
-			for(int j=0;j<17;j++) {
-				mark[i][j]=maze[i][j];
-			}
+					for(int j=0;j<17;j++) {
+						mark[i][j]=0;
+					}
 		}
+				
+				
 		
 
-		show("maze[12,15]::", maze);
-		show("mark[12,15]::", mark);
+		show("maze[14,17]::", maze);
+		show("mark[14,17]::", mark);
 
 		path(maze, mark, 12, 15);
-		show("maze[12,15]::", maze);
-		show("mark[12,15]::", mark);
+		show("maze[14,17]::", maze);
+		show("mark[14,17]::", mark);
 
 
 	}
