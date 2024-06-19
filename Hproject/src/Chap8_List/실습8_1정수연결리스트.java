@@ -1,6 +1,7 @@
 package Chap8_List;
 //단순한 linked list에서 insert, delete하는 알고리즘을 코딩: 1단계
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -23,15 +24,53 @@ class LinkedList1 {
 
 	public boolean Delete(int element) //전달된 element 값이 존재 하면 삭제하고 true로 리턴
 	{
-		Node1 q, current = first;
-		q = current;
+		Node1  current = first;
+		Node1 q =current;
+		if(Search(element)){
+			//삭제과정
+			
+			if(current.data==element) {
+				current=current.link;
+				q=current;
+				first=current;
+				
+			}
+			else {
+			while(current.data!=element) {
+				q=current;
+				current=current.link;
+			}
+			if (current.link!=null) {
+				
+				current=current.link;
+				q.link=current;
+			}
+			else {
+				current=q;
+				current.link=null;
+				q.link=null;
+			}
+			}
+			
+			if (Search(element)) {Delete(element);}
+			return true;
+		}
+		
+		
+		return false;
+		
 	
 	}
 
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
 		Node1 p = first;
-		int num = 0;
-
+	//	int num = 0;
+		
+		while(p != null) {
+			System.out.print(p.data +" ");
+			p=p.link;
+		}
+		System.out.println();
 	}
 
 	public void Add(int element) // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
@@ -45,29 +84,26 @@ class LinkedList1 {
 		
 		Node1 p= first; //p라는 변수를 도입해서 각 노드를 따라 간다.
 		Node1 q= null;
-		while(p!=null) {
-			if (element > p.data) {
-				q=p;  //q가 p를 따라다닌다.
-				p= p.link;
-				
-			}
-			else {
-				if(q==null) {   //5 앞에 3을 넣을 때
-					newNode.link=p;
-					first=newNode;
-					return;
-				}
-				q.link=newNode;      //10 20 사이에 15 넣을 때
-				newNode.link=p;
-			}
+		while (p != null && p.data < element) { // Traverse until end or find correct position
+		        q = p; // Update q to current node
+		        p = p.link; // Move to the next node
+		}
+
+		if (q == null) { // Insert at the beginning of the list
+		        newNode.link = p;
+		        first = newNode;
+		} else { // Insert somewhere in between or at the end
+		        newNode.link = p; // Link newNode to the next node
+		        q.link = newNode; // Link previous node to newNode
+		}
 			
-		}
-		if (q!= null) {           //가장 마지막에 30 넣을 때
-			q.link=newNode;
-		}
+			
+	}
+		
+	
 		
 
-	}
+	
 
 	public boolean Search(int data) { //전달된 data 값을 찾아 존재하면 true로 리턴, 없으면 false로 리턴
 		Node1 ptr = first;
@@ -87,7 +123,17 @@ class LinkedList1 {
 		 * 난이도 등급: 최상
 		 * a = (3, 5, 7), b = (2,4,8,9)이면 a = (2,3,4,5,8,9)가 되도록 구현하는 코드
 		 */
-	}
+		
+			Node1 p = b.first;
+		    
+		    
+		    while (p !=null) {
+		    		 Add(p.data); 
+		    		 p=p.link;
+		    }
+		     Show();
+		 }
+	
 }
 
 public class 실습8_1정수연결리스트 {
@@ -137,24 +183,28 @@ public class 실습8_1정수연결리스트 {
 		Random rand = new Random();
 		LinkedList1 l = new LinkedList1();
 		Scanner sc = new Scanner(System.in);
-		int count = 0; //난수 생성 갯수
+		int count = 10; //난수 생성 갯수
 		int data = 0;
 		do {
 			switch (menu = SelectMenu()) {//Menu 생성자 호출 - menu 객체를 리턴한다 
 			case Add: // 난수를 삽입하는데 올림차순으로 정렬되도록 구현
 				for (int i =0; i < count; i++) {
 					data = rand.nextInt(20);
+					System.out.print(data + " ");
 					l.Add(data);
 				}
+				System.out.println();
 				break;
 			case Delete:
 				System.out.println("삭제할 값을 입력: ");
 				data = sc.nextInt();
 				boolean tag = l.Delete(data);
 				System.out.println("삭제 데이터 존재여부: " + tag);
+				System.out.println();
 				break;
 			case Show: //리스트 전체를 출력
 				l.Show();
+				System.out.println();
 				break;
 			case Search: //입력 숫자 n을 검색한다.
 				int n = sc.nextInt();
@@ -163,6 +213,7 @@ public class 실습8_1정수연결리스트 {
 					System.out.println("검색 값 = " + n + " 데이터가 없습니다.");
 				else
 					System.out.println("검색 값 = " + n + " 데이터가 존재합니다.");
+				System.out.println();
 				break;
 			case Merge://리스트 l과 l2를 합병하여 올림차순 정렬이 되게 구현한다 
 				LinkedList1 l2 = new LinkedList1();
@@ -170,7 +221,14 @@ public class 실습8_1정수연결리스트 {
 					data = rand.nextInt(20);
 					l2.Add(data);
 				}
+				System.out.println();
+				System.out.println("LinkedList1 l");
+				l.Show();
+				System.out.println("LinkedList1 l2");
+				l2.Show();
+				System.out.println("리스트 l과 l2를 합병");
 				l.Merge(l2);//merge 실행후 show로 결과 확인 - 새로운 노드를 만들지 않고 합병 - 난이도 상
+				System.out.println();
 				break;
 			case Exit: // 꼬리 노드 삭제
 				break;
@@ -178,4 +236,3 @@ public class 실습8_1정수연결리스트 {
 		} while (menu != Menu.Exit);
 	}
 }
-
