@@ -124,60 +124,59 @@ class LinkedList1 {
 		 * a = (3, 5, 7), b = (2,4,8,9)이면 a = (2,3,4,5,8,9)가 되도록 구현하는 코드
 		 */
 		
-			Node1 p = b.first;
-		    
-		    
-		    while (p !=null) {
-		    		 Add(p.data); 
-		    		 p=p.link;
-		    }
-		     Show();
-		 }
-	void Merge(LinkedList1 b) {
-		/*
-		 * 연결리스트 a,b에 대하여 a = a + b
-		 * merge하는 알고리즘 구현으로 in-place 방식으로 합병/이것은 새로운 노드를 만들지 않고 합병하는 알고리즘 구현
-		 * 난이도 등급: 최상
-		 * a = (3, 5, 7), b = (2,4,8,9)이면 a = (2,3,4,5,8,9)가 되도록 구현하는 코드
-		 */
+		Node1 p =first, q= b.first;
+		Node1 tmp= null;
 		
-			Node1 p = first, q= b.first;
-			Node1 tmp= null;
-		    if (p.data > q.data) {
-		    	first=q;
-		    	b.first=p;
-		    }
-		    
-		    
-		    while (p.link !=null && q.link!=null) {
-		    	if (p.data<q.data) {
+		if (q == null) {
+	        return;
+	    }
+	    
+	    // Handle case where a is empty
+	    
+		if (p == null) {
+	        first = q;
+	        return;
+	    }
+		
+		
+			
+		if (p.data > q.data) {
+		    	 first = q; 
+		    	 b.first=p; 
+		    	 
+		}
+	
+		
+		
+		
+		while(p !=null && q!=null) {
+		    	
+		    		if (p.data<=q.data) {
 		    			
-		    			while(   p.link.data <q.data ) {
+		    				while( p.link !=null && p.link.data <=q.data ) {
+		    				
+		    					p=p.link;
+		    				}
+		    				tmp=p;
 		    				p=p.link;
-		    			}
-		    			tmp=p;
-		    			p=p.link;
-		    			tmp.link=q;
+		    				tmp.link=q;
+	    			}
 		    			
-		    	}
 		    	
 		    	
-		    	else { //
-		    		while( q.link.data <p.data ) {
-	    				
-		    			q=q.link;
+		    		else { //
+		    				while(q.link !=null && q.link.data <=p.data ) {
+		    					q=q.link;
+		    				}
+		    				tmp=q;
+		    				q=q.link;
+		    				tmp.link=p;
 	    				
 		    		}
-	    			tmp=q;
-	    			q=q.link;
-	    			tmp.link=p;
-	    			
-		    		
-		    	}
+		  }
 		    		 
-		    }
-		    
 		   
+		    
 		 }
 	
 }
