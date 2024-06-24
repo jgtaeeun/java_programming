@@ -274,11 +274,19 @@ public class 실습8_1정수연결리스트 {
 				System.out.println("리스트 l과 l2를 합병");
 				l.Merge(l2);//merge 실행후 show로 결과 확인 - 새로운 노드를 만들지 않고 합병 - 난이도 상
 				System.out.println();
+<<<<<<< HEAD
 				l.Show();//merge 실행후 show로 결과 확인
+=======
+				l.Show();/merge 실행후 show로 결과 확인
+>>>>>>> 3e6ea2283f4dde6e8c2a348060934353c4175d72
 				break;
 			case Exit: // 꼬리 노드 삭제
 				break;
 			}
 		} while (menu != Menu.Exit);
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3e6ea2283f4dde6e8c2a348060934353c4175d72
