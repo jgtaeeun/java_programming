@@ -37,7 +37,9 @@ class SimpleObject5 {
 
 	private static class NoOrderComparator implements Comparator<SimpleObject5> {
 		public int compare(SimpleObject5 d1, SimpleObject5 d2) {
-			return (d1.no.compareTo(d2.no) > 0) ? 1 : (d1.no.compareTo(d2.no)<0) ? -1 : 0;
+			int num1 = Integer.parseInt(d1.no);
+			int num2 = Integer.parseInt(d2.no);
+			return (num1 > num2) ? 1 : (num1 < num2) ? -1 : 0;
 		}
 	}
 
