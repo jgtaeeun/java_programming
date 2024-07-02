@@ -277,15 +277,26 @@ public class 실습8_1정수연결리스트 {
 
 				l.Show();//merge 실행후 show로 결과 확인
 
+<<<<<<< HEAD
 				
+=======
+>>>>>>> 41e77c9bb1c307d39ae398f0274b7a049a088da7
 
 				break;
 			case Exit: // 꼬리 노드 삭제
 				break;
 			}
 		} while (menu != Menu.Exit);
+<<<<<<< HEAD
 	
 }
 
 }
+=======
+	}
+
+}
+
+
+>>>>>>> 41e77c9bb1c307d39ae398f0274b7a049a088da7
 
