@@ -192,40 +192,94 @@ class CircularList {
 		if (q == b.first) {
 	        return;
 	    }
-	    
-		 while (p != first && q != b.first) {
-			 if (cc.compare(p.data, q.data) > 0) 
-			 {
-				 if (cc.compare(p.link.data,q.data) >0) {
-					 q= q.link;
-					 continue;
-				 }
-				 tmp = q.link;
-				 q.link = p;
-				 q = tmp;
-			 }
-			 else if  (cc.compare(p.data, q.data) <= 0) {
-				 if (p.link == first)//처리 필요
-				 if (cc.compare(p.link.data,q.data) < 0) {
-					 p = p.link;
-					 continue;
-				 }
-				 tmp = p.link;
-				 p.link = q;
-				 p = tmp;
-			 }
-	
-		 }
-		 while (p != first) {
-			 
-		 }
-		 while (q != first) {
-			 
-		 }
-	
-	
-	    
+		//처음부분
+		if (cc.compare(q.data, p.data)<0) {
+			b.first.link=p;
+			first.link=q;
+			
+		}
+		
+		//중앙연결
+		while (p.link!=first && q.link!=b.first) {
+				if (cc.compare(q.data, p.data) > 0){
+					
+				
+					if (cc.compare(p.link.data,q.data) <0&&p.link != first ) {
+							p= p.link;
+							continue;
+							
+					}
+					
+					
+					
+					tmp = p.link;
+					p.link = q;
+					p = tmp;
+				}
+				else if  (cc.compare(p.data, q.data) >= 0) {
+
+					if (cc.compare(q.link.data,p.data) < 0&&q.link != b.first) {
+						q = q.link;
+						continue;
+					}
+					
+					
+					
+					tmp = q.link;
+					q.link = p;
+					q = tmp;
+					
+				}
+
+		}
+		//끝부분
+		if (p.link==first && q.link==b.first) {
+			if (cc.compare(q.data, p.data)<0)  { q.link=p;  p.link=first; }
+			else {p.link=q; q.link=first;}
+		
+		}
+		else if (p.link==first && q.link!=b.first) {
+			while(true) {
+				if (cc.compare(p.data,q.data)<0 ) {
+					tmp.link=p;
+					p.link=q;
+					
+			
+					while (q.link!=b.first) {
+						q=q.link;
+					}
+					q.link=first;
+					break;
+				}
+				else {
+					tmp=q;
+					q=q.link;
+				}
+			}
+			
+		}
+		else if (p.link!=first && q.link==b.first) {
+			while(true) {
+				if (cc.compare(p.data,q.data)>0 ) {
+					tmp.link=q;
+					q.link=p;
+			
+					while (p.link!=first) {
+						p=p.link;
+					}
+					p.link=first;
+					break;
+				}
+				else {
+					tmp=p;
+					p=p.link;
+				}
+			}
+		}
+		
+		
 	}
+			
 }
 
 public class 실습8_4객체원형리스트 {
