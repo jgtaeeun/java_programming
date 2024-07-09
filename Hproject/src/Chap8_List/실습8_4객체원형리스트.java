@@ -186,25 +186,33 @@ class CircularList {
 		 * 난이도 등급: 최상급
 		 * 회원번호에 대하여 a = (3, 5, 7), b = (2,4,8,9)이면 a = (2,3,4,5,8,9)가 되도록 구현하는 코드
 		 */
-		Node3 p =first.link, q= b.first.link;
-		Node3 tmp= null;
 		
+		Node3 tmp= null;
+		Node3 p =first.link, q= b.first.link;
 		if (q == b.first) {
 	        return;
 	    }
 		//처음부분
 		if (cc.compare(q.data, p.data)<0) {
-			b.first.link=p;
-			first.link=q;
+			tmp = first;
+
+			first = b.first;
+
+			b.first = tmp;
 			
 		}
+		p =first.link; q= b.first.link;
 		
 		//중앙연결
-		while (p.link!=first && q.link!=b.first) {
+		while (p!=first && q!=b.first) {
 				if (cc.compare(q.data, p.data) > 0){
 					
-				
-					if (cc.compare(p.link.data,q.data) <0&&p.link != first ) {
+					if (p.link ==first) {
+						p.link=q;
+						p=first;
+						break;
+					}
+					if (cc.compare(p.link.data,q.data) <0) {
 							p= p.link;
 							continue;
 							
@@ -217,8 +225,14 @@ class CircularList {
 					p = tmp;
 				}
 				else if  (cc.compare(p.data, q.data) >= 0) {
+					if (q.link == b.first) {
+						q.link = p;
 
-					if (cc.compare(q.link.data,p.data) < 0&&q.link != b.first) {
+						q = b.first;
+
+						break;
+					}
+					if (cc.compare(q.link.data,p.data) < 0) {
 						q = q.link;
 						continue;
 					}
@@ -232,52 +246,19 @@ class CircularList {
 				}
 
 		}
-		//끝부분
-		if (p.link==first && q.link==b.first) {
-			if (cc.compare(q.data, p.data)<0)  { q.link=p;  p.link=first; }
-			else {p.link=q; q.link=first;}
-		
-		}
-		else if (p.link==first && q.link!=b.first) {
-			while(true) {
-				if (cc.compare(p.data,q.data)<0 ) {
-					tmp.link=p;
-					p.link=q;
-					
-			
-					while (q.link!=b.first) {
-						q=q.link;
-					}
-					q.link=first;
-					break;
-				}
-				else {
-					tmp=q;
-					q=q.link;
-				}
+		while (q != b.first) {
+
+			if (q.link == b.first) {
+
+				q.link = first;
+
+				break;
+
 			}
-			
+
+			q = q.link;
+
 		}
-		else if (p.link!=first && q.link==b.first) {
-			while(true) {
-				if (cc.compare(p.data,q.data)>0 ) {
-					tmp.link=q;
-					q.link=p;
-			
-					while (p.link!=first) {
-						p=p.link;
-					}
-					p.link=first;
-					break;
-				}
-				else {
-					tmp=p;
-					p=p.link;
-				}
-			}
-		}
-		
-		
 	}
 			
 }
