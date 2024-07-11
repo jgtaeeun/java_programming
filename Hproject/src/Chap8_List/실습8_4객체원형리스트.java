@@ -49,7 +49,7 @@ class SimpleObject3 {
 
 	private static class NoOrderComparator implements Comparator<SimpleObject3> {
 		public int compare(SimpleObject3 d1, SimpleObject3 d2) {
-			return (d1.no.compareTo(d2.no) > 0) ? 1 : (d1.no.compareTo(d2.no) < 0) ? -1 : 0;
+			return (Integer.parseInt(d1.no)-Integer.parseInt(d2.no) > 0) ? 1 : (Integer.parseInt(d1.no)-Integer.parseInt(d2.no) < 0) ? -1 : 0;
 		}
 	}
 
@@ -142,8 +142,10 @@ class CircularList {
 	}
 
 	public void Add(SimpleObject3 element, Comparator<SimpleObject3> cc) // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
-	{	Node3 newNode = new Node3(element);
-	 if (first.link == first) { // 리스트가 비어있을 경우
+	{	
+		Node3 newNode = new Node3(element);
+	 
+	    if (first.link == first) { // 리스트가 비어있을 경우
 	        first.link = newNode;
 	        newNode.link = first; // 자기 자신을 가리키도록 설정
 	        
@@ -152,18 +154,24 @@ class CircularList {
 
 	 	Node3 p= first.link; //p라는 변수를 도입해서 각 노드를 따라 간다.
 		Node3 q= null;
-		while (p != first && cc.compare(element, p.data)==1) { // Traverse until end or find correct position
-		        q = p; // Update q to current node
-		        p = p.link; // Move to the next node
+		
+
+		while (p != first &&(cc.compare(element, p.data)>=0)) { // Traverse until end or find correct position
+	        q = p; // Update q to current node
+	        p= p.link; // Move to the next node
 		}
 
 		if (q == null) { // Insert at the beginning of the list
-		        newNode.link = p;
-		        first = newNode;
+	        newNode.link = p;
+	        first.link = newNode;
 		} else { // Insert somewhere in between or at the end
-		        newNode.link = p; // Link newNode to the next node
-		        q.link = newNode; // Link previous node to newNode
+	        
+			
+			newNode.link = p; // Link newNode to the next node
+	        q.link = newNode; // Link previous node to newNode
+	        
 		}
+		
 	}
 	
 
