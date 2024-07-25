@@ -147,6 +147,8 @@ class DoubledLinkedList2 {
 		if (q == null) { // Insert at the beginning of the list
 	        newNode.rlink = p;
 	        first.rlink = newNode;
+	        newNode.llink=first;
+	        p.llink=newNode;
 		} else { // Insert somewhere in between or at the end
 	        
 			
