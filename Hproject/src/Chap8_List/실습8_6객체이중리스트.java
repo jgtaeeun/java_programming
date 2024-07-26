@@ -26,11 +26,35 @@ class SimpleObject2 {
 		this.no = null;
 		this.name = null;
 	}
+//	public SimpleObject2(String sno, String sname, String expire) {
+//        // 입력 문자열에서 숫자 부분을 추출
+//        this.no = extractNumber(sno);
+//        this.name = sname;
+ //       this.expire = expire;
+ //   }
+    // 숫자 부분 추출
+	
+ //   private String extractNumber(String input) {
+        // "(s"와 ")" 사이의 부분을 안전하게 추출
+  //      int start = input.indexOf("(s");
+  //      int end = input.indexOf(")", start);
+
+  //      if (start == -1 || end == -1) {
+  //          System.err.println("Warning: Invalid format for number extraction: " + input);
+  //          return "0"; // 기본 값을 반환하거나 다른 처리
+  //      }
+
+  //      start += 2; // "(s" 다음부터 시작
+ //       return input.substring(start, end).trim();
+ //   }
+	
 	// --- 문자열 표현을 반환 ---//
 	@Override
 	public String toString() {
 		return "(" + no + ") " + name;
 	}
+	
+	
 	// --- 데이터를 읽어 들임 ---//
 	void scanData(String guide, int sw) {
 		Scanner sc = new Scanner(System.in);
@@ -51,9 +75,10 @@ class SimpleObject2 {
 	private static class NoOrderComparator implements Comparator<SimpleObject2> {
 		@Override
 		public int compare(SimpleObject2 d1, SimpleObject2 d2) {
-			return (Integer.parseInt(d1.no)-Integer.parseInt(d2.no) > 0) ? 1 : (Integer.parseInt(d1.no)-Integer.parseInt(d2.no) < 0) ? -1 : 0;
+			return (d1.no.compareTo(d2.no) > 0) ? 1 : ((d1.no.compareTo(d2.no) < 0)) ? -1 : 0;
 		}
 	}
+	
 
 	// --- 이름으로 순서를 매기는 comparator ---//
 	public static final Comparator<SimpleObject2> NAME_ORDER = new NameOrderComparator();
@@ -70,10 +95,11 @@ class Node4 {
 	SimpleObject2 data; // 데이터
 	Node4 llink; // 좌측포인터(앞쪽 노드에 대한 참조)
 	Node4 rlink; // 우측포인터(뒤쪽 노드에 대한 참조)
+	
 	public Node4(SimpleObject2 element) {
 		data = element;
-		rlink = null;
 		llink = null;
+		rlink = null;
 	}
 }
 
@@ -82,9 +108,10 @@ class DoubledLinkedList2 {
 
 	// --- 생성자(constructor) ---//
 	public DoubledLinkedList2() {
-		first = new Node4(null); // dummy(first) 노드를 생성
-		first.rlink = first;
-		first.llink = first;
+		SimpleObject2 data = new SimpleObject2();
+		first = new Node4(data); // dummy(first) 노드를 생성
+		first.llink=first;
+		first.rlink=first;
 	}
 
 	// --- 리스트가 비어있는가? ---//
@@ -94,22 +121,26 @@ class DoubledLinkedList2 {
 
 	// --- 노드를 검색 ---//
 	public boolean search(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
-		Node4 ptr1 = first.rlink;
-		Node4 ptr2 = first.llink;
-		Node4 tmp=null;
-		boolean result=false;
-		while(true) {
-			if((c.compare(obj, ptr1.data) ==0 )||(c.compare(obj, ptr2.data) ==0  ) ){
-				return true;
-			}		
-			tmp=ptr1;
-			if (ptr1==ptr2) {result=true; break;}
-			ptr2=ptr2.llink;
-			if (tmp==ptr2) {result=true; break;}
-			ptr1=ptr1.rlink;
-		}
-		
-		return result;
+		    Node4 leftPtr = first.rlink;  // 리스트의 시작 노드
+		    Node4 rightPtr = first.llink; // 리스트의 끝 노드
+
+		    while (leftPtr != rightPtr && leftPtr != rightPtr.rlink) {
+		        // 양쪽에서 비교
+		        if (c.compare(obj, leftPtr.data) == 0 || c.compare(obj, rightPtr.data) == 0) {
+		            return true; // 데이터가 일치하면 true 반환
+		        }
+
+		        // 노드 업데이트
+		        leftPtr = leftPtr.rlink; // 왼쪽 포인터를 오른쪽으로 이동
+		        rightPtr = rightPtr.llink; // 오른쪽 포인터를 왼쪽으로 이동
+		    }
+
+		    // 마지막으로 체크해야 할 경우 (리스트의 길이가 홀수일 때)
+		    if (leftPtr == rightPtr && c.compare(obj, leftPtr.data) == 0) {
+		        return true;
+		    }
+
+		    return false; // 리스트를 모두 순회한 후에도 찾지 못하면 false 반환
 	}
 
 	// --- 전체 노드 표시 ---//
@@ -154,8 +185,12 @@ class DoubledLinkedList2 {
 			
 			newNode.rlink = p; // Link newNode to the next node
 	        q.rlink = newNode; // Link previous node to newNode
-	        first.llink=newNode;
 	        newNode.llink=q;
+	        if (p != first) {
+	            p.llink = newNode; // Link next node to newNode
+	        } else {
+	            first.llink = newNode; // Update the end of the list
+	        }
 		}
 		
 
@@ -163,7 +198,47 @@ class DoubledLinkedList2 {
 
 	// --- list에 삭제할 데이터가 있으면 해당 노드를 삭제 ---//
 	public void delete(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
+		 	Node4 leftPtr = first.rlink;  // 리스트의 시작 노드
+		    Node4 rightPtr = first.llink; // 리스트의 끝 노드
+		    Node4 tmpLeft=null;
+		    Node4 tmpRight=null;
+		    while (leftPtr != rightPtr && leftPtr != rightPtr.rlink) {
+		        // 양쪽에서 비교
+		        if (c.compare(obj, leftPtr.data) == 0) {
+		        	if (tmpLeft!=null) {
+		        	tmpLeft.llink=rightPtr;
+		        	rightPtr.rlink=tmpLeft;
+		        	}
+		        	else {
+		        		first.llink=leftPtr.llink;
+		        		leftPtr.rlink=first.rlink;
+		        	}
+		        }
+		        else if (c.compare(obj, rightPtr.data) == 0) {
+		        	if (tmpRight!=null) {
+		        	tmpRight.rlink=leftPtr;
+		        	leftPtr.llink=tmpRight;
+		        	}
+		        	else {
+		        		first.rlink=rightPtr.rlink;
+		        		rightPtr.llink=first.llink;
+		        	}
+		        }
 
+		        // 노드 업데이트
+		        tmpLeft=leftPtr;
+		        tmpRight=rightPtr;
+		        leftPtr = leftPtr.rlink; // 왼쪽 포인터를 오른쪽으로 이동
+		        rightPtr = rightPtr.llink; // 오른쪽 포인터를 왼쪽으로 이동
+		    }
+
+		    // 마지막으로 체크해야 할 경우 (리스트의 길이가 홀수일 때)
+		    if (leftPtr == rightPtr && c.compare(obj, leftPtr.data) == 0) {
+		    	tmpLeft.llink=tmpRight;
+		    	tmpRight.rlink=tmpLeft;
+		    }
+
+		    
 	}
 	
 	public DoubledLinkedList2 merge_NewList(DoubledLinkedList2 lst2, Comparator<SimpleObject2> cc) {
