@@ -63,6 +63,7 @@ class SimpleObject2 {
 		if ((sw & NO) == NO) { //& 는 bit 연산자임
 			System.out.print("번호: ");
 			no = sc.next();
+			
 		}
 		if ((sw & NAME) == NAME) {
 			System.out.print("이름: ");
@@ -198,38 +199,44 @@ class DoubledLinkedList2 {
 
 	// --- list에 삭제할 데이터가 있으면 해당 노드를 삭제 ---//
 	public void delete(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
-		 	Node4 leftPtr = first.rlink;  // 리스트의 시작 노드
-		    Node4 rightPtr = first.llink; // 리스트의 끝 노드
+		 	Node4 rightPtr = first.rlink;  // 리스트의 시작 노드
+		    Node4  leftPtr = first.llink; // 리스트의 끝 노드
 		    Node4 tmpLeft=null;
 		    Node4 tmpRight=null;
-		    while (leftPtr != rightPtr && leftPtr != rightPtr.rlink) {
+		    while (leftPtr != rightPtr && leftPtr != tmpRight) {
 		        // 양쪽에서 비교
 		        if (c.compare(obj, leftPtr.data) == 0) {
 		        	if (tmpLeft!=null) {
-		        	tmpLeft.llink=rightPtr;
-		        	rightPtr.rlink=tmpLeft;
+		        	tmpLeft.llink=leftPtr.llink;
+		        	leftPtr.llink.rlink=tmpLeft;
 		        	}
 		        	else {
 		        		first.llink=leftPtr.llink;
-		        		leftPtr.rlink=first.rlink;
+		        		leftPtr.llink.rlink=leftPtr.rlink;
+		        		break;
 		        	}
+		        	break;
 		        }
+		        
+		        
 		        else if (c.compare(obj, rightPtr.data) == 0) {
 		        	if (tmpRight!=null) {
-		        	tmpRight.rlink=leftPtr;
-		        	leftPtr.llink=tmpRight;
+		        	tmpRight.rlink=rightPtr.rlink;
+		        	rightPtr.rlink.llink=tmpRight;
 		        	}
 		        	else {
 		        		first.rlink=rightPtr.rlink;
 		        		rightPtr.llink=first.llink;
+		        		
 		        	}
+		        	break;
 		        }
 
 		        // 노드 업데이트
 		        tmpLeft=leftPtr;
 		        tmpRight=rightPtr;
-		        leftPtr = leftPtr.rlink; // 왼쪽 포인터를 오른쪽으로 이동
-		        rightPtr = rightPtr.llink; // 오른쪽 포인터를 왼쪽으로 이동
+		        leftPtr = leftPtr.llink; // 왼쪽 포인터를 오른쪽으로 이동
+		        rightPtr = rightPtr.rlink; // 오른쪽 포인터를 왼쪽으로 이동
 		    }
 
 		    // 마지막으로 체크해야 할 경우 (리스트의 길이가 홀수일 때)
@@ -340,7 +347,7 @@ public class 실습8_6객체이중리스트 {
 				if (!result)
 					System.out.println("검색 값 = " + so + "데이터가 없습니다.");
 				else
-					System.out.println("검색 값 = " + so + "데이터가 존재합니다.");
+					System.out.println("검색 값 = "  + so + "데이터가 존재합니다.");
 				break;
 			case Merge_NewList://기존 2개의 리스트를 합병하여 새로운 리스트를 생성(새로운 노드를 생성하여 추가)
 //				for (int i = 0; i < count; i++) {//3개의 객체를 연속으로 입력받아 l2 객체를 만든다 
